@@ -18,7 +18,12 @@ module.exports = (sequelize, DataTypes) => {
     {},
   );
   Blog.associate = function (models) {
-    // associations can be defined here
+    // একটি blog-এর অনেক comment থাকতে পারে
+    Blog.hasMany(models.Comment, {
+      foreignKey: "blogId",
+      as: "comments",
+      onDelete: "CASCADE", // blog delete হলে comment গুলোও delete হবে
+    });
   };
   return Blog;
 };

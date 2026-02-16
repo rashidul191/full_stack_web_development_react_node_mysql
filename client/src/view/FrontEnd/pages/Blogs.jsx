@@ -1,10 +1,13 @@
 import { React, useEffect, useState } from "react";
+
 import axios from "axios";
 import { URL } from "../../../config/app";
 import { useForm } from "react-hook-form";
+
 import LabeledInput from "../../Components/LabeledInput";
 import LabeledTextarea from "../../Components/LabeledTextarea";
 import SubmitBtn from "../../Components/SubmitBtn";
+import { useNavigate } from "react-router-dom";
 
 const Blog = () => {
   const {
@@ -12,14 +15,30 @@ const Blog = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const storeData = {
+      image: "image here...",
+      title: data.title,
+      content: data.content,
+    };
+    axios.post(`${URL}/blogs`, storeData).then((res) => {
+      if (res.data.statusCode === 200) {
+        window.location.reload();
+      } else {
+        alert(res.data.message);
+      }
+    });
+  };
+
 
   const [blogs, setBlogs] = useState([]);
 
+  let navigate = useNavigate();
+
   useEffect(() => {
     axios.get(`${URL}/blogs`).then((res) => {
-      // console.log(res.data);
-      setBlogs(res.data);
+      // console.log(res.data.data);
+      setBlogs(res.data.data);
     });
   }, []);
 
@@ -48,7 +67,7 @@ const Blog = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="p-5">
           <LabeledInput
             className=""
-            name="first_name"
+            name={"title"}
             required={true}
             register={register}
             errors={errors}
@@ -67,11 +86,25 @@ const Blog = () => {
       </div>
       {/* Blog Show List */}
       <div className="text-center">
-        {blogs?.map((item, index) => (
+        {blogs.map((item) => (
           <div key={item.id}>
-            <span>{index}</span>
+            <span>{item.id}</span>
             <h1>{item.title}</h1>
             <p>{item.content}</p>
+            <button
+              className="bg-gray-700 text-white px-4 py-2 rounded"
+              onClick={() => navigate(`/blog/${item.id}`)}
+            >
+              Details
+            </button>
+            
+            {/* <button
+              className="bg-red-500 text-white px-4 py-2 rounded"
+              onClick={}
+            >
+              Delete
+            </button> */}
+
           </div>
         ))}
       </div>

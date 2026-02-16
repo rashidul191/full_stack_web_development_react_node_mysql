@@ -1,28 +1,47 @@
 const { Blog } = require("../models");
-module.exports.getAllBlogs = async (req, res) => {
 
-  const data = await Blog.findAll();
+const { sendSuccess, sendError } = require("../utility/response.handle.js");
 
-  // console.log(data);
-  res.json(data);
+const {
+  indexService,
+  createService,
+  showService,
+  updateService,
+  deleteService,
+} = require("../utility/curd.service.js");
+module.exports.index = async (req, res) => {
+  try {
+    const data = await indexService(Blog);
+    sendSuccess(res, "Successfully found all data!!", data);
+  } catch (error) {
+    sendError(res, "Can't find data in the database!!", error);
+  }
 };
 
-module.exports.createBlog = async (req, res) => {
-  const blog = req.body;
-
-  //   console.log(blog);
-  await Blog.create(blog);
-  res.send(blog, "Create blog");
+module.exports.create = async (req, res, next) => {
+  try {
+    const data = await createService(Blog, req.body);
+    sendSuccess(res, "Successfully create data!!", data);
+  } catch (error) {
+    next();
+    sendError(res, "Can't create data!!", error);
+  }
 };
 
-module.exports.getBlogById = (req, res) => {
-  res.send("Get blog by id");
+module.exports.show = async (req, res) => {
+  try {
+    // const data = await Blog.findByPk(req.params.id);
+    const data = await showService(Blog, req.params.id);
+    sendSuccess(res, "Successfully found single data!!", data);
+  } catch (error) {
+    sendError(res, "Can't find data in the database!!", error);
+  }
 };
 
-module.exports.updateBlog = (req, res) => {
+module.exports.update = (req, res) => {
   res.send("Update blog");
 };
 
-module.exports.deleteBlog = (req, res) => {
+module.exports.delete = (req, res) => {
   res.send("Delete blog");
 };
