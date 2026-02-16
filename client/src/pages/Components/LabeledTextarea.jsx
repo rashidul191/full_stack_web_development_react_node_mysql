@@ -1,9 +1,8 @@
 import React from "react";
 
-const LabeledInput = ({
+const LabeledTextarea = ({
   label,
   name,
-  type = "text",
   placeholder,
   required = false,
   register,
@@ -29,16 +28,17 @@ const LabeledInput = ({
         </span>
       </label>
 
-      {/* Input */}
-      <input
-        type={type}
-        className={`border-2 border-gray-500 p-1.5 rounded w-full ${className}`}
+      {/* Textarea */}
+
+      <textarea
+        rows={3}
+        className={`border-2 border-gray-500 p-1.5 rounded w-full ${className}`}     
         id={name}
         placeholder={placeholder}
         {...register(name, {
           required: required ? `${finalLabel} is Required` : false,
         })}
-      />
+      ></textarea>
 
       {/* Error Message */}
       {errors?.[name] && (
@@ -52,4 +52,4 @@ const LabeledInput = ({
   );
 };
 
-export default LabeledInput;
+export default LabeledTextarea;

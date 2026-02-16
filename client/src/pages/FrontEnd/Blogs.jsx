@@ -3,6 +3,8 @@ import axios from "axios";
 import { URL } from "../../config/app";
 import { useForm } from "react-hook-form";
 import LabeledInput from "../Components/LabeledInput";
+import LabeledTextarea from "../Components/LabeledTextarea";
+import SubmitBtn from "../Components/SubmitBtn";
 const Blog = () => {
   const {
     register,
@@ -42,131 +44,26 @@ const Blog = () => {
           <button type="submit">Create</button>
         </form> */}
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="p-5">
           <LabeledInput
-            className="input input-bordered w-full max-w-lg"
+            className=""
             name="first_name"
             required={true}
             register={register}
-            errors={errors}            
+            errors={errors}
           />
 
-          <div>
-            <label className="label">
-              <span className="label-text">Tool Image</span>
-            </label>
-            <input
-              {...register("image", {
-                required: { value: true, message: "Tool Image is Required" },
-              })}
-              type="file"
-              className="input input-bordered w-full max-w-lg"
-            />
-            <label className="label">
-              {errors.image?.type === "required" && (
-                <span className="label-text-alt text-red-500">
-                  {errors.image.message}
-                </span>
-              )}
-            </label>
-          </div>
+          <LabeledTextarea
+            className=""
+            name={"content"}
+            placeholder={"Content here..."}
+            register={register}
+            errors={errors}
+          />
 
-          <div>
-            <label className="label">
-              <span className="label-text">Available Quantity</span>
-            </label>
-            <input
-              {...register("avaQuantity", {
-                required: {
-                  value: true,
-                  message: "Available Quantity is Required",
-                },
-              })}
-              type="number"
-              placeholder="Available Quantity"
-              className="input input-bordered w-full max-w-lg"
-            />
-            <label className="label">
-              {errors.avaQuantity?.type === "required" && (
-                <span className="label-text-alt text-red-500">
-                  {errors.avaQuantity.message}
-                </span>
-              )}
-            </label>
-          </div>
+          <SubmitBtn className="" value={"Add Tool"} />
 
-          <div>
-            <label className="label">
-              <span className="label-text">Minimum Orders</span>
-            </label>
-            <input
-              {...register("minOrder", {
-                required: {
-                  value: true,
-                  message: "Minimum Orders is Required",
-                },
-              })}
-              type="number"
-              placeholder="Minimum Orders"
-              className="input input-bordered w-full max-w-lg"
-            />
-            <label className="label">
-              {errors.minOrder?.type === "required" && (
-                <span className="label-text-alt text-red-500">
-                  {errors.minOrder.message}
-                </span>
-              )}
-            </label>
-          </div>
-
-          <div>
-            <label className="label">
-              <span className="label-text">Price Per Unit</span>
-            </label>
-            <input
-              {...register("pricePerUnit", {
-                required: {
-                  value: true,
-                  message: "Price Per Unit is Required",
-                },
-              })}
-              type="number"
-              placeholder="Price Per Unit"
-              className="input input-bordered w-full max-w-lg"
-            />
-            <label className="label">
-              {errors.pricePerUnit?.type === "required" && (
-                <span className="label-text-alt text-red-500">
-                  {errors.pricePerUnit.message}
-                </span>
-              )}
-            </label>
-          </div>
-
-          <div>
-            <textarea
-              {...register("description", {
-                required: {
-                  value: true,
-                  message: "Description is Required",
-                },
-              })}
-              className="textarea input-bordered w-full max-w-lg my-3"
-              placeholder="Description"
-              rows={5}
-              name="description"
-            ></textarea>
-            <label className="label">
-              {errors.description?.type === "required" && (
-                <span className="label-text-alt text-red-500">
-                  {errors.description.message}
-                </span>
-              )}
-            </label>
-          </div>
-          <div>
-            <input className="btn w-full" type="submit" value="Add Tool" />
-          </div>
+          
         </form>
       </div>
       {/* Blog Show List */}
