@@ -2,7 +2,7 @@ import React from "react";
 
 const SubmitBtn = ({ value = "Submit", className = "" }) => {
   return (
-    <div className="mb-1">
+    <div className="mb-1 mt-2">
       {/* Input Submit */}
       <input
         className={`w-full bg-gray-800 text-white py-2 rounded font-semibold ${className}`}

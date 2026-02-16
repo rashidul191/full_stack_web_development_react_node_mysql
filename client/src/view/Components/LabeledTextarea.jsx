@@ -19,7 +19,7 @@ const LabeledTextarea = ({
   const finalLabel = label ?? nameText;
 
   return (
-    <div className="mb-1">
+    <div className="mb-2">
       {/* Label */}
       <label htmlFor={name} className="label">
         <span className="label-text text-gray-800 font-semibold">

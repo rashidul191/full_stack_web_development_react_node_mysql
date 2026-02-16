@@ -1,10 +1,10 @@
 import { React, useEffect, useState } from "react";
 import axios from "axios";
-import { URL } from "../../config/app";
+import { URL } from "../../../config/app";
 import { useForm } from "react-hook-form";
-import LabeledInput from "../Components/LabeledInput";
-import LabeledTextarea from "../Components/LabeledTextarea";
-import SubmitBtn from "../Components/SubmitBtn";
+import LabeledInput from "../../Components/LabeledInput";
+import LabeledTextarea from "../../Components/LabeledTextarea";
+import SubmitBtn from "../../Components/SubmitBtn";
 const Blog = () => {
   const {
     register,
@@ -62,12 +62,10 @@ const Blog = () => {
           />
 
           <SubmitBtn className="" value={"Add Tool"} />
-
-          
         </form>
       </div>
       {/* Blog Show List */}
-      <div>
+      <div className="text-center">
         {blogs?.map((item, index) => (
           <div key={item.id}>
             <span>{index}</span>

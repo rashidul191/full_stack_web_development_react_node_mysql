@@ -1,22 +1,25 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import Home from "./pages/FrontEnd/Home";
-import Blogs from "./pages/FrontEnd/Blogs";
-import NotFound from "./pages/NotFound";
+import NotFound from "./view/FrontEnd/pages/NotFound";
+import WebRoutes from "./routes/WebRoutes";
+import AdminRoutes from "./routes/AdminRoutes";
+import UserRoutes from "./routes/UserRoutes";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/blog" element={<Blogs />} />
+        {/* FrontEnd Layout */}
+        <WebRoutes />
 
-        {/* User Panel Routes */}
+        {/* Admin Panel */}
+        <AdminRoutes />
 
-        {/* Admin Panel Routes */}
+        {/* User Panel */}
+        <UserRoutes />
 
-        {/* NotFound Route */}
-        <Route path="*" element={<NotFound />}></Route>
+        {/* Not Found */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
