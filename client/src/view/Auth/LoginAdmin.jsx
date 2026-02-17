@@ -19,7 +19,7 @@ const LoginAdmin = () => {
       title: data.title,
       content: data.content,
     };
-    axios.post(`${URL}/login`, storeData).then((res) => {
+    axios.post(`${URL}/admin/login`, storeData).then((res) => {
       if (res.data.statusCode === 200) {
         navigator("/");
       } else {
@@ -41,6 +41,13 @@ const LoginAdmin = () => {
             </h1>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+              <LabeledInput
+                
+                name="name"
+                required={true}
+                register={register}
+                errors={errors}
+              />
               <LabeledInput
                 type="email"
                 name="email"
