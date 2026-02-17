@@ -81,7 +81,7 @@ const Blog = () => {
             errors={errors}
           />
 
-          <SubmitBtn className="" value={"Add Tool"} />
+          <SubmitBtn className="" value={"Add Blog"} />
         </form>
       </div>
       {/* Blog Show List */}

@@ -1,15 +1,16 @@
 import React from "react";
 
-const LabeledInput = ({
-  label,
-  name,
-  type = "text",
-  placeholder,
-  required = false,
-  register,
-  errors,
-  className = "",
-}) => {
+const LabeledInput = (props) => {
+  const {
+    label,
+    name,
+    type = "text",
+    placeholder,
+    required = false,
+    register,
+    errors,
+    className = "",
+  } = props;
   // Auto format label from name
   const nameText = name
     .replace(/([A-Z])/g, " $1")

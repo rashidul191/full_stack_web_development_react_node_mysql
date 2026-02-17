@@ -8,6 +8,9 @@ import Home from "./view/FrontEnd/Pages/Home";
 import Blogs from "./view/FrontEnd/Pages/Blogs";
 import NotFound from "./view/FrontEnd/Pages/NotFound";
 import BlogDetails from "./view/FrontEnd/Pages/BlogDetails";
+import LoginUser from "./view/Auth/LoginUser";
+import RegistrationUser from "./view/Auth/RegistrationUser";
+import LoginAdmin from "./view/Auth/LoginAdmin";
 
 function App() {
   return (
@@ -19,11 +22,20 @@ function App() {
         <Route path="/blog/:id" element={<BlogDetails />} />
       </Route>
 
+      {/* User Auth Route */}
+      <Route path="/login" element={<LoginUser />} />
+      <Route path="/register" element={<RegistrationUser />} />
+      <Route path="/forgot-password" element={<h1>Forgot Password</h1>} />
+
       {/* User Panel */}
       <Route path="/user" element={<UserLayout />}>
         <Route path="dashboard" element={<h1>User Dashboard</h1>} />
         <Route path="profile" element={<h1>User Profile</h1>} />
       </Route>
+
+      {/* Admin Auth Route */}
+      <Route path="/admin/login" element={<LoginAdmin />} />
+      {/* <Route path="/register" element={<h1>Register</h1>} /> */}
 
       {/* Admin Panel */}
       <Route path="/admin" element={<AdminLayout />}>
