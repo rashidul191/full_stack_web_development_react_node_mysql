@@ -15,7 +15,9 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
     },
-    {},
+    {
+      tableName: "blogs", // 👈 এখানে explicitly দিলে      
+    },
   );
   Blog.associate = function (models) {
     // একটি blog-এর অনেক comment থাকতে পারে
