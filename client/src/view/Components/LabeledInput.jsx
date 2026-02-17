@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Mail, Key, Eye, EyeOff } from "lucide-react";
+import { Mail, LockKeyhole, Eye, EyeOff } from "lucide-react";
 
 const LabeledInput = (props) => {
   const {
@@ -10,6 +10,7 @@ const LabeledInput = (props) => {
     required = false,
     register,
     errors,
+    watch,
     className = "",
   } = props;
   // Auto format label from name
@@ -40,11 +41,15 @@ const LabeledInput = (props) => {
         <div className="relative">
           {/* Left Icon */}
           {type === "email" && (
-            <Mail className="absolute left-3 top-3 w-5 h-5 text-gray-600 " />
+            <div className="absolute left-0.5 top-1/2 -translate-y-1/2 bg-gray-200 p-2 rounded-l">
+              <Mail className="w-5 h-5 text-gray-700" />
+            </div>
           )}
 
           {type === "password" && (
-            <Key className="absolute left-3 top-3 w-5 h-5 text-gray-600" />
+            <div className="absolute left-0.5 top-1/2 -translate-y-1/2 bg-gray-200 p-2 rounded-l">
+              <LockKeyhole className="w-5 h-5 text-gray-700" />
+            </div>
           )}
 
           {/* Input */}
@@ -54,14 +59,35 @@ const LabeledInput = (props) => {
             placeholder={placeholder}
             className={`w-full border-2 border-gray-600 rounded-md py-1.5 ${type === "password" ? "px-10" : type === "email" ? "pl-10" : "px-1.5"} focus:outline-none focus:ring-2 focus:ring-indigo-500 transition ${className}`}
             {...register(name, {
-              required: required ? `${label} is Required` : false,
+              required: required ? `${finalLabel} is Required` : false,
+              ...(type === "email" && {
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: `Enter a valid ${finalLabel}`,
+                },
+              }),
+              ...(type === "password" && {
+                minLength: {
+                  value: 6,
+                  message: `${finalLabel} must be at least 6 characters`,
+                },
+              }),
+              ...(type === "password" &&
+                name === "confirm_password" && {
+                  minLength: {
+                    value: 6,
+                    message: `${finalLabel} must be at least 6 characters`,
+                  },
+                  validate: (value) =>
+                    value === watch("password") || "Passwords do not match",
+                }),
             })}
           />
 
           {/* Eye Toggle */}
           {type === "password" && (
             <div
-              className="absolute right-3 top-3 cursor-pointer text-gray-500"
+              className="absolute right-0.5 top-1/2 -translate-y-1/2 cursor-pointer text-gray-700 bg-gray-200 p-2 rounded-r"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (

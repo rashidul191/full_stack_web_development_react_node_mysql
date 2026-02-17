@@ -42,13 +42,6 @@ const LoginAdmin = () => {
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
               <LabeledInput
-                
-                name="name"
-                required={true}
-                register={register}
-                errors={errors}
-              />
-              <LabeledInput
                 type="email"
                 name="email"
                 required={true}
