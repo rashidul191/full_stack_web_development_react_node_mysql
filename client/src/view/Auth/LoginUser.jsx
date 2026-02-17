@@ -5,6 +5,7 @@ import LabeledInput from "../Components/LabeledInput";
 import SubmitBtn from "../Components/SubmitBtn";
 import { Link } from "react-router-dom";
 import ApplicationLogo from "../Components/ApplicationLogo";
+import { URL } from "../../config/app";
 
 const LoginUser = () => {
   const {
@@ -32,11 +33,11 @@ const LoginUser = () => {
       <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
         <div className="w-full max-w-md">
           {/* Logo */}
-          <ApplicationLogo />
+          <ApplicationLogo className={"h-32"} />
 
           {/* Card */}
-          <div className="bg-white shadow-lg rounded-lg p-6">
-            <h1 className="text-2xl font-semibold text-center text-gray-800 mb-6">
+          <div className="bg-white shadow-lg rounded-lg px-6 py-8">
+            <h1 className="text-2xl font-semibold text-center text-gray-800 mb-5">
               Login
             </h1>
 
