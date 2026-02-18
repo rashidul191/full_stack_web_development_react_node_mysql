@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
       role: {
         type: DataTypes.TINYINT,
         allowNull: false,
-        defaultValue: Roles.USER,
+        defaultValue: Roles.NONE,
         validate: {
           isIn: [Object.values(Roles)],
         },
