@@ -1,3 +1,5 @@
+const {Model} = require('sequelize');
+const { Roles } = require("../constants/enums/roles.enum.js");
 module.exports = (sequelize, DataTypes) => {
   const Admin = sequelize.define(
     "Admin",
@@ -25,6 +27,14 @@ module.exports = (sequelize, DataTypes) => {
       avatar: {
         type: DataTypes.STRING,
         allowNull: true,
+      },
+      role: {
+        type: DataTypes.TINYINT,
+        allowNull: false,
+        defaultValue: Roles.NONE,
+        validate: {
+          isIn: [Object.values(Roles)],
+        },
       },
     },
     {

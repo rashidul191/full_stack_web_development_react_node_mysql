@@ -1,4 +1,5 @@
 "use strict";
+const { Roles } = require("../constants/enums/roles.enum.js");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -14,7 +15,6 @@ module.exports = {
         allowNull: false,
       },
 
-     
       name: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -35,6 +35,11 @@ module.exports = {
       avatar: {
         type: Sequelize.STRING,
         allowNull: true,
+      },
+      role: {
+        type: Sequelize.ENUM(...Object.values(Roles)),
+        allowNull: false,
+        defaultValue: Roles.NONE,
       },
       createdAt: {
         allowNull: false,
