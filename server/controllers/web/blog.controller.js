@@ -1,6 +1,6 @@
-const { Blog } = require("../models");
+const {Blog} = require("../../models/index.js");
 
-const { sendSuccess, sendError } = require("../utility/response.handle.js");
+const { sendSuccess, sendError } = require("../../utility/response.handle.js");
 
 const {
   indexService,
@@ -8,7 +8,7 @@ const {
   showService,
   updateService,
   deleteService,
-} = require("../utility/curd.service.js");
+} = require("../../utility/curd.service.js.js");
 module.exports.index = async (req, res) => {
   try {
     const data = await indexService(Blog);
