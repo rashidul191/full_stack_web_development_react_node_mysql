@@ -43,8 +43,8 @@ module.exports = {
 
       role: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: Roles.NONE,
+        allowNull: true,
+        defaultValue: Roles.USER,
       },
 
       // 🔥 IMPORTANT FIX

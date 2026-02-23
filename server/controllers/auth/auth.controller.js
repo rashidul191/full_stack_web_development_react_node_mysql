@@ -13,13 +13,23 @@ const {
 } = require("../../utility/curd.service.js.js");
 module.exports.login = async (req, res) => {
   try {
-    const user = await User.findOne({ username: req.body.username });
-    if (!user)
-      return res.status(401).json({ message: "Invalid username or password" });
-    if (user.password !== req.body.password)
-      return res.status(401).json({ message: "Invalid username or password" });
+    const { username, password } = req.body;
 
-    sendSuccess(res, "Successfully found all data!!", data);
+    // 1️⃣ Find user by username
+    const user = await User.findOne({ where: { username } });
+
+    if (!user) {
+      return sendError(res, "Invalid username or password");
+    }
+
+    // 2️⃣ Compare password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return sendError(res, "Invalid username or password");
+    }
+
+    // 4️⃣ Send success response
+    sendSuccess(res, "Login successful", user);
   } catch (error) {
     sendError(res, "Can't find data in the database!!", error);
   }
@@ -28,7 +38,7 @@ module.exports.login = async (req, res) => {
 module.exports.register = async (req, res, next) => {
   try {
     // console.log(Roles.ADMIN);
-    const { username, name, phone, email, password } = req.body;
+    const { username, name, phone, email, password, role } = req.body;
 
     // 1️⃣ Basic validation
     if (!username || !name || !phone || !email || !password) {
@@ -46,16 +56,14 @@ module.exports.register = async (req, res, next) => {
       return sendError(res, "Email already exists");
     }
 
-    // 3️⃣ Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // 4️⃣ Create user
+    // 3️⃣  Create user
     const newUserData = {
       username,
       name,
       phone,
       email,
-      password: hashedPassword,
+      password, // password hash form model
+      role: role ?? Roles.USER,
     };
 
     const data = await createService(User, newUserData);

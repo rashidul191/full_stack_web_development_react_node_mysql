@@ -8,15 +8,15 @@ app.use(cors());
 
 // User Auth Routes
 const loginRoutes = require("./routes/auth/login.route");
-app.use("/login", loginRoutes);
+app.use("/api/login", loginRoutes);
 const registerRoutes = require("./routes/auth/register.route");
-app.use("/register", registerRoutes);
+app.use("/api/register", registerRoutes);
 
 // Web Routes
 const blogRoutes = require("./routes/web/blog.route");
 // posting to database
 // app.use("/api/blogs", blogRoutes);
-app.use("/blogs", blogRoutes);
+app.use("/api/blogs", blogRoutes);
 
 // here we are export model
 app.get("/", (req, res) => {

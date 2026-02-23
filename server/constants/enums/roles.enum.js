@@ -1,8 +1,8 @@
 const Roles = {
-  NONE: 0,
-  ADMIN: 1,
-  USER: 2,
-  MANAGER: 3,
+  ADMIN: 0,
+  USER: 1,
+  MANAGER: 2,
+  SELLER: 3,
 
   // isValid(value) {
   //   return [0, 1, 2, 3].includes(value);
