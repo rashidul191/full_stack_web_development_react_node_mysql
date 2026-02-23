@@ -2,6 +2,8 @@ const { User } = require("../../models/index.js");
 const bcrypt = require("bcrypt");
 const { sendSuccess, sendError } = require("../../utility/response.handle.js");
 
+const { Roles } = require("../../constants/enums/roles.enum.js");
+
 const {
   indexService,
   createService,
@@ -25,6 +27,7 @@ module.exports.login = async (req, res) => {
 
 module.exports.register = async (req, res, next) => {
   try {
+    // console.log(Roles.ADMIN);
     const { username, name, phone, email, password } = req.body;
 
     // 1️⃣ Basic validation
@@ -47,20 +50,16 @@ module.exports.register = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // 4️⃣ Create user
-    const newUser = {
+    const newUserData = {
       username,
       name,
       phone,
       email,
       password: hashedPassword,
-      
     };
-    // 5️⃣ Remove password from response
 
-    const userResponse = newUser.toJSON();
-    delete userResponse.password;
-
-    const data = await createService(User, formBodyData);
+    const data = await createService(User, newUserData);
+    // console.log(userResponse, newUserData);
     sendSuccess(res, "Successfully create account!!", data);
   } catch (error) {
     next();

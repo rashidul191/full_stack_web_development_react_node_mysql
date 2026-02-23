@@ -3,13 +3,16 @@ const Roles = {
   ADMIN: 1,
   USER: 2,
   MANAGER: 3,
+
+  // isValid(value) {
+  //   return [0, 1, 2, 3].includes(value);
+  // },
+
+  // getName(value) {
+  //   return Object.keys(this).find((key) => this[key] === value);
+  // },
 };
 
-const RoleLabels = Object.fromEntries(
-  Object.entries(Roles).map(([key, value]) => [
-    value,
-    key.charAt(0) + key.slice(1).toLowerCase(),
-  ]),
-);
+Object.freeze(Roles);
 
-module.exports = { Roles, RoleLabels };
+module.exports = { Roles };

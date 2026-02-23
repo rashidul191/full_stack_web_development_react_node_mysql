@@ -4,7 +4,7 @@ const { Roles } = require("../constants/enums/roles.enum.js");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("admin", {
+    await queryInterface.createTable("admins", {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -36,19 +36,19 @@ module.exports = {
         allowNull: true,
       },
       role: {
-        type: Sequelize.ENUM(...Object.values(Roles)),
+        type: Sequelize.INTEGER,
         allowNull: false,
         defaultValue: Roles.NONE,
       },
+      // 🔥 IMPORTANT FIX
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn("NOW"),
       },
+
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn("NOW"),
       },
     });
   },

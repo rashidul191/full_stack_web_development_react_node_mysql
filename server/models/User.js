@@ -58,6 +58,7 @@ module.exports = (sequelize, DataTypes) => {
           isIn: [Object.values(Roles)],
         },
       },
+
     },
 
     {
