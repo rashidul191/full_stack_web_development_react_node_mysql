@@ -1,8 +1,11 @@
-const { User } = require("../../models/index.js");
+const { Admin } = require("../../../models/index.js");
 const bcrypt = require("bcrypt");
-const { sendSuccess, sendError } = require("../../utility/response.handle.js");
+const {
+  sendSuccess,
+  sendError,
+} = require("../../../utility/response.handle.js");
 
-const { Roles } = require("../../constants/enums/roles.enum.js");
+const { Roles } = require("../../../constants/enums/roles.enum.js");
 
 const {
   indexService,
@@ -10,13 +13,15 @@ const {
   showService,
   updateService,
   deleteService,
-} = require("../../utility/curd.service.js");
+} = require("../../../utility/curd.service.js");
+
 module.exports.login = async (req, res) => {
   try {
     const { username, password } = req.body;
+    console.log(username, password);
 
     // 1️⃣ Find user by username
-    const user = await User.findOne({ where: { username } });
+    const user = await Admin.findOne({ where: { username } });
 
     if (!user) {
       return sendError(res, "Invalid username or password");
@@ -29,7 +34,7 @@ module.exports.login = async (req, res) => {
     }
 
     // 4️⃣ Send success response
-    sendSuccess(res, "Login successful", user);
+    sendSuccess(res, "Admin Login successful", user);
   } catch (error) {
     sendError(res, "Can't find data in the database!!", error);
   }
@@ -46,7 +51,7 @@ module.exports.register = async (req, res, next) => {
     }
 
     // 2️⃣ Check if user already exists (username or email)
-    const existingUser = await User.findOne({
+    const existingUser = await Admin.findOne({
       where: {
         email: email,
       },
@@ -63,11 +68,10 @@ module.exports.register = async (req, res, next) => {
       phone,
       email,
       password, // password hash form model
-      role: role ?? Roles.USER,
+      role: role ?? Roles.ADMIN,
     };
 
     const data = await createService(User, newUserData);
-    // console.log(userResponse, newUserData);
     sendSuccess(res, "Successfully create account!!", data);
   } catch (error) {
     next();
@@ -77,7 +81,6 @@ module.exports.register = async (req, res, next) => {
 
 module.exports.show = async (req, res) => {
   try {
-    // const data = await Blog.findByPk(req.params.id);
     const data = await showService(Blog, req.params.id);
     sendSuccess(res, "Successfully found single data!!", data);
   } catch (error) {

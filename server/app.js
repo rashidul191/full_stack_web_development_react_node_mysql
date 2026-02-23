@@ -18,6 +18,14 @@ const blogRoutes = require("./routes/web/blog.route");
 // app.use("/api/blogs", blogRoutes);
 app.use("/api/blogs", blogRoutes);
 
+
+// Admin Routes
+const adminLoginRoutes = require("./routes/admin/auth/login.route");
+app.use("/api/admin/login", adminLoginRoutes);
+
+const adminRegisterRoutes = require("./routes/admin/auth/register.route");
+app.use("/api/admin/register", adminRegisterRoutes);
+
 // here we are export model
 app.get("/", (req, res) => {
   res.send("server is running...");

@@ -8,7 +8,7 @@ const {
   showService,
   updateService,
   deleteService,
-} = require("../../utility/curd.service.js.js");
+} = require("../../utility/curd.service.js");
 module.exports.index = async (req, res) => {
   try {
     const data = await indexService(Blog);
