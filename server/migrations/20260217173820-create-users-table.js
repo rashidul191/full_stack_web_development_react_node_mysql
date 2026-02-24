@@ -13,6 +13,7 @@ module.exports = {
       username: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
 
       name: {
@@ -23,6 +24,7 @@ module.exports = {
       phone: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
 
       email: {
@@ -45,6 +47,17 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: true,
         defaultValue: Roles.USER,
+      },
+
+      referrer_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: "users", // table name
+          key: "id", // column name
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
       },
 
       // 🔥 IMPORTANT FIX

@@ -4,7 +4,19 @@ const { Roles } = require("../constants/enums/roles.enum.js");
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    static associate(models) {}
+    static associate(models) {
+      // 🔹 A user belongs to a referrer
+      User.belongsTo(models.User, {
+        foreignKey: "referrer_id",
+        as: "referrer",
+      });
+
+      // 🔹 A user can have many referrals
+      User.hasMany(models.User, {
+        foreignKey: "referrer_id",
+        as: "referrals",
+      });
+    }
 
     async comparePassword(password) {
       return await bcrypt.compare(password, this.password);
@@ -16,7 +28,6 @@ module.exports = (sequelize, DataTypes) => {
       return values;
     }
   }
-
   User.init(
     {
       username: {
@@ -58,7 +69,6 @@ module.exports = (sequelize, DataTypes) => {
           isIn: [Object.values(Roles)],
         },
       },
-
     },
 
     {

@@ -38,7 +38,10 @@ module.exports.login = async (req, res) => {
 module.exports.register = async (req, res, next) => {
   try {
     // console.log(Roles.ADMIN);
-    const { username, name, phone, email, password, role } = req.body;
+
+    // console.log(req.body, req.file);
+
+    const { avatar, username, name, phone, email, password, role } = req.body;
 
     // 1️⃣ Basic validation
     if (!username || !name || !phone || !email || !password) {
@@ -64,6 +67,7 @@ module.exports.register = async (req, res, next) => {
       email,
       password, // password hash form model
       role: role ?? Roles.USER,
+      avatar: req.file ? req.file.path : null,
     };
 
     const data = await createService(User, newUserData);
