@@ -6,6 +6,9 @@ const cors = require("cors");
 app.use(express.json()); // all data are in json format
 app.use(cors());
 
+// file path
+app.use("/uploads", express.static("public/uploads"));
+
 // User Auth Routes
 const loginRoutes = require("./routes/auth/login.route");
 app.use("/api/login", loginRoutes);

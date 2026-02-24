@@ -1,80 +1,70 @@
-// get product service
+// get all data
 module.exports.indexService = async (model) => {
   const result = await model.findAll({});
   return result;
 };
 
+// create data
 module.exports.createService = async (model, data) => {
   const result = await model.create(data);
   return result;
 };
 
-//
+// get single by id
 module.exports.showService = async (model, id) => {
   const result = await model.findByPk(id);
   return result;
 };
 
-// update product service
-module.exports.updateService = async (req) => {
-  // first way of updateOne() method
-  // const updateProduct = await Product.updateOne(
-  //   { _id: req.params.id }, // kaka update korbo
-  //   { $set: req.body }, // ki update korbo
-  //   { runValidators: true } // update validator way
-  // );
-  // second way of update save() method
-  // const product = await Product.findById(req.params.id);
-  // const updateProduct = await product.set(req.body).save();
+// update single by id
+module.exports.updateService = async (model, id, data) => {
+  const record = await model.findByPk(id);
+  if (!record) throw new Error("Record not found");
+  const result = await record.update(data);
+  return result;
+};
 
-  // first way of updateOne() method increase product price
-  const updateProduct = await Product.updateOne(
-    { _id: req.params.id }, // kaka update korbo
-    { $inc: req.body }, // ki update korbo
-    { runValidators: true }, // update validator way
+// bulk update multiple records
+module.exports.bulkUpdateService = async (model, dataArray) => {
+  // dataArray = [{ id: 1, data: {...} }, { id: 2, data: {...} }]
+  const promises = dataArray.map((item) =>
+    model.findByPk(item.id).then((record) => record?.update(item.data)),
   );
-  return updateProduct;
+  const results = await Promise.all(promises);
+  return results;
 };
 
-// bulk / multiple data update product service
-module.exports.bulkUpdateService = async (data) => {
-  // console.log(data.ids, data.data);
-  // const result = await Product.updateMany({ _id: data.ids }, data.data, {
-  //   runValidators: true,
-  // });
+// delete single by id
+module.exports.deleteService = async (model, id) => {
+  const record = await model.findByPk(id);
+  if (!record) throw new Error("Record not found");
+  await record.destroy();
+  return { message: "Deleted successfully" };
+};
 
-  // other way of bulk update data
-  let products = [];
-  data.products.forEach((product) => {
-    products.push(Product.updateOne({ _id: product.id }, product.data));
+// bulk delete
+module.exports.bulkDeleteService = async (model, ids) => {
+  // ids = [1,2,3]
+  const results = await model.destroy({ where: { id: ids } });
+  return { message: `Deleted ${results} records successfully` };
+};
+
+// query with filter, pagination, sorting
+module.exports.queryDataService = async (model, filters = {}, queries = {}) => {
+  const { page = 1, limit = 10, sortBy = "id", filterBy = null } = queries;
+
+  const offset = (page - 1) * limit;
+
+  const result = await model.findAll({
+    where: filters,
+    offset: offset,
+    limit: limit,
+    order: [[sortBy, "ASC"]],
+    attributes: filterBy || undefined,
   });
-  const result = await Promise.all(products);
-  console.log(result);
-  return result;
-};
 
-// delete product service by id
-module.exports.deleteService = async (productId) => {
-  const result = await Product.deleteOne({ _id: productId });
-  return result;
-};
+  const totalRecords = await model.count({ where: filters });
+  const pageCount = Math.ceil(totalRecords / limit);
 
-// bulk / multiple delete data
-module.exports.bulkDeleteService = async (ids) => {
-  // const result = await Product.deleteMany({});
-  const result = await Product.deleteMany({ _id: ids });
-  return result;
-};
-
-// query data , page, limit, sort
-module.exports.queryDataService = async (filters, queries) => {
-  const result = await Product.find(filters)
-    .skip(queries.skip)
-    .limit(queries.limit)
-    .select(queries.filterBy)
-    .sort(queries.sortBy);
-
-  const totalProducts = await Product.countDocuments(filters);
-  const pageCount = Math.ceil(totalProducts / queries.limit);
-  return { totalProducts, pageCount, result };
+  return { totalRecords, pageCount, result };
 };

@@ -1,10 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const authController = require("../../controllers/auth/auth.controller");
+const uploadFile = require("../../middleware/upload.middleware");
 
-const multer = require("multer");
+const upload = uploadFile("users");
+
+
+/* const multer = require("multer");
 const fs = require("fs");
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const filePath = "public/uploads/";
@@ -16,10 +19,11 @@ const storage = multer.diskStorage({
     cb(null, filePath);
   },
 });
-
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage }); */
 
 router.post("/", upload.single("avatar"), authController.register); // create
+router.put("/:id", upload.single("avatar"), authController.update); // create
+
 
 // router.get("/", authController.index); // index
 // router.post("/", authController.create); // create
