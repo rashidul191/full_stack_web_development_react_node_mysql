@@ -3,10 +3,13 @@ const router = express.Router();
 const authController = require("../../controllers/auth/auth.controller");
 
 const multer = require("multer");
+const fs = require("fs");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "public/uploads/");
+    const filePath = "public/uploads/";
+    fs.mkdirSync(filePath, { recursive: true }); // auto create folder like: public/uploads/
+    cb(null, filePath);
   },
   filename: function (req, file, cb) {
     const filePath = Date.now() + "-" + file.originalname;
