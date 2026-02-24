@@ -4,6 +4,9 @@ const { sendSuccess, sendError } = require("../../utility/response.handle.js");
 
 const { Roles } = require("../../constants/enums/roles.enum.js");
 
+const ImageField = require("../../lib/Image");
+const imageHandler = new ImageField("users", "images/no-image.png");
+
 const {
   indexService,
   createService,
@@ -37,9 +40,6 @@ module.exports.login = async (req, res) => {
 
 module.exports.register = async (req, res, next) => {
   try {
-    // console.log(Roles.ADMIN);
-
-    // console.log(req.body, req.file);
 
     const { avatar, username, name, phone, email, password, role } = req.body;
 
@@ -68,6 +68,7 @@ module.exports.register = async (req, res, next) => {
       password, // password hash form model
       role: role ?? Roles.USER,
       avatar: req.file ? req.file.path : null,
+      // avatar: req.file ? imageHandler.storeFile(req.file) : null,
     };
 
     const data = await createService(User, newUserData);
