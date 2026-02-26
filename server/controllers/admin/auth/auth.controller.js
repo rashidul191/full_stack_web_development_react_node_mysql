@@ -1,5 +1,6 @@
 const { Admin } = require("../../../models/index.js");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const {
   sendSuccess,
   sendError,
@@ -18,20 +19,42 @@ const {
 module.exports.login = async (req, res) => {
   try {
     const { username, password } = req.body;
-    console.log(username, password);
-
     // 1️⃣ Find user by username
     const user = await Admin.findOne({ where: { username } });
 
     if (!user) {
-      return sendError(res, "Invalid username or password");
+      return sendError(
+        res,
+        "Authorization failed!",
+        (error = { message: "Invalid username or password" }),
+        (statusCode = 401),
+      );
     }
 
     // 2️⃣ Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return sendError(res, "Invalid username or password");
+      return sendError(
+        res,
+        "Authorization failed!",
+        (error = { message: "Invalid username or password" }),
+        (statusCode = 401),
+      );
     }
+
+    // console.log(process.env.JWT_SECRET_KEY);
+
+    // Generate JWT Token
+    const token = jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.JWT_SECRET_KEY,
+      {
+        expiresIn: "30d", // 30day
+      },
+    );
+    res.cookie("access-token", token, {
+      httpOnly: true,
+    });
 
     // 4️⃣ Send success response
     sendSuccess(res, "Admin Login successful", user);

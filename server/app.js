@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const dotenv = require("dotenv");
 
 // middleware
 app.use(express.json()); // all data are in json format
+dotenv.config();
 app.use(cors());
 
 // file path
@@ -20,7 +22,6 @@ const blogRoutes = require("./routes/web/blog.route");
 // posting to database
 // app.use("/api/blogs", blogRoutes);
 app.use("/api/blogs", blogRoutes);
-
 
 // Admin Routes
 const adminLoginRoutes = require("./routes/admin/auth/login.route");
