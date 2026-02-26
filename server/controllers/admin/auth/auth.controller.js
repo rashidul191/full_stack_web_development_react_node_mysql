@@ -49,15 +49,16 @@ module.exports.login = async (req, res) => {
       { id: user.id, email: user.email },
       process.env.JWT_SECRET_KEY,
       {
-        expiresIn: "30d", // 30day
+        expiresIn: "2d", // 2day
       },
     );
+
     res.cookie("access-token", token, {
       httpOnly: true,
     });
 
     // 4️⃣ Send success response
-    sendSuccess(res, "Admin Login successful", user);
+    sendSuccess(res, "Admin Login successful", { "access-token": token });
   } catch (error) {
     sendError(res, "Can't find data in the database!!", error);
   }
