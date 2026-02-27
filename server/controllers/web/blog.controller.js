@@ -1,4 +1,4 @@
-const {Blog} = require("../../models/index.js");
+const { Blog } = require("../../models/index.js");
 
 const { sendSuccess, sendError } = require("../../utility/response.handle.js");
 

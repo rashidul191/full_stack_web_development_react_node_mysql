@@ -15,6 +15,7 @@ const {
   updateService,
   deleteService,
 } = require("../../../utility/curd.service.js");
+const { generateToken } = require("../../../utility/jwt-token.js");
 
 module.exports.login = async (req, res) => {
   try {
@@ -45,17 +46,19 @@ module.exports.login = async (req, res) => {
     // console.log(process.env.JWT_SECRET_KEY);
 
     // Generate JWT Token
-    const token = jwt.sign(
-      { id: user.id, email: user.email },
-      process.env.JWT_SECRET_KEY,
-      {
-        expiresIn: "2d", // 2day
-      },
-    );
+    // const token = jwt.sign(
+    //   { id: user.id, email: user.email },
+    //   process.env.JWT_SECRET_KEY,
+    //   {
+    //     expiresIn: "2d", // 2day
+    //   },
+    // );
 
-    res.cookie("access-token", token, {
-      httpOnly: true,
-    });
+    // res.cookie("access-token", token, {
+    //   httpOnly: true,
+    // });
+
+    const token = generateToken(user);
 
     // 4️⃣ Send success response
     sendSuccess(res, "Admin Login successful", { "access-token": token });
