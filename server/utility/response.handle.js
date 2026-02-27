@@ -1,7 +1,6 @@
 const sendSuccess = (res, message, data = {}, statusCode = 200) => {
   return res.status(statusCode).json({
-    status: "success",
-    statusCode,
+    status: "success", 
     message,
     data,
   });
@@ -10,7 +9,6 @@ const sendSuccess = (res, message, data = {}, statusCode = 200) => {
 const sendError = (res, message, error = {}, statusCode = 400) => {
   return res.status(statusCode).json({
     status: "fail",
-    statusCode,
     message,
     error: error.message || error,
   });

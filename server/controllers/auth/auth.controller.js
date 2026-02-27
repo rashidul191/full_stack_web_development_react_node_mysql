@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const { sendSuccess, sendError } = require("../../utility/response.handle.js");
 
 const { Roles } = require("../../constants/enums/roles.enum.js");
+const { generateToken } = require("../../utility/jwt-token.js");
 
 const ImageFile = require("../../lib/ImageFile.js");
 const imageHandler = new ImageFile("users");
@@ -14,25 +15,31 @@ const {
   updateService,
   deleteService,
 } = require("../../utility/curd.service.js");
+
 module.exports.login = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    // console.log(req.body);
+    const { email, password } = req.body;
 
     // 1️⃣ Find user by username
-    const user = await User.findOne({ where: { username } });
+    const auth = await User.findOne({ where: { email } });
 
-    if (!user) {
-      return sendError(res, "Invalid username or password");
+    // console.log(auth);
+
+    if (!auth) {
+      return sendError(res, "Invalid email or password");
     }
 
     // 2️⃣ Compare password
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, auth.password);
     if (!isMatch) {
-      return sendError(res, "Invalid username or password");
+      return sendError(res, "Invalid email or password");
     }
 
+    const token = generateToken(auth);
+
     // 4️⃣ Send success response
-    sendSuccess(res, "Login successful", user);
+    sendSuccess(res, "Login successful",  token );
   } catch (error) {
     sendError(res, "Can't find data in the database!!", error);
   }

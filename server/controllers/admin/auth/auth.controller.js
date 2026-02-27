@@ -61,7 +61,7 @@ module.exports.login = async (req, res) => {
     const token = generateToken(user);
 
     // 4️⃣ Send success response
-    sendSuccess(res, "Admin Login successful", { "access-token": token });
+    sendSuccess(res, "Admin Login successful",  token );
   } catch (error) {
     sendError(res, "Can't find data in the database!!", error);
   }
