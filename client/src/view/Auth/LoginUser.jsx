@@ -1,14 +1,18 @@
 import axios from "axios";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import LabeledInput from "../Components/LabeledInput";
 import SubmitBtn from "../Components/SubmitBtn";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ApplicationLogo from "../Components/ApplicationLogo";
 import { URL } from "../../config/app";
 import toast from "../../utility/toast";
+import { AuthContext } from "../../context/AuthContext";
 
 const LoginUser = () => {
+  const navigate = useNavigate();
+
+  const { loginUser } = useContext(AuthContext);
 
   const {
     register,
@@ -20,13 +24,15 @@ const LoginUser = () => {
       const res = await axios.post(`${URL}/login`, data);
       //  axios.post(`${URL}/login`, data.then(res) => console.log(res.data));
       if (res.status === 200) {
-        const token = res.data.data;
-        localStorage.setItem("access-token", token);
+        // res.data.data === { id, email, role, token }
+        loginUser(res.data.data); // context + localStorage
+
         toast.success(res.data.message);
-        // navigate("/"); // home
-        <Navigate to="/user/dashboard" />
+
+        navigate("/user/dashboard");
       }
     } catch (error) {
+      console.log(error);
       toast.error(error.response?.data?.message);
     }
   };

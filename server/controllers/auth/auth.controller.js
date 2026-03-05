@@ -24,8 +24,6 @@ module.exports.login = async (req, res) => {
     // 1️⃣ Find user by username
     const auth = await User.findOne({ where: { email } });
 
-    // console.log(auth);
-
     if (!auth) {
       return sendError(res, "Invalid email or password");
     }
@@ -39,7 +37,7 @@ module.exports.login = async (req, res) => {
     const token = generateToken(auth);
 
     // 4️⃣ Send success response
-    sendSuccess(res, "Login successful",  token );
+    sendSuccess(res, "Login successful", { auth: auth, token: token });
   } catch (error) {
     sendError(res, "Can't find data in the database!!", error);
   }
