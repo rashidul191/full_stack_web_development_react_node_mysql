@@ -11,7 +11,7 @@ import BlogDetails from "./view/FrontEnd/Pages/BlogDetails";
 import LoginUser from "./view/Auth/LoginUser";
 import RegistrationUser from "./view/Auth/RegistrationUser";
 import LoginAdmin from "./view/Auth/LoginAdmin";
-import PrivateRoute from "./context/PrivateRoute";
+import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
   return (

@@ -3,8 +3,9 @@ import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
   const userInfo = use(AuthContext);
-  console.log(userInfo.auth.auth);
-  const email = userInfo.auth.auth.email;
+  console.log(userInfo);
+  // const email = userInfo?.auth?.auth?.email;
+  const email = userInfo?.auth?.auth?.email;
 
   return (
     <>

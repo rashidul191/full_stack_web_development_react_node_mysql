@@ -1,11 +1,10 @@
-import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 import LabeledInput from "../Components/LabeledInput";
 import SubmitBtn from "../Components/SubmitBtn";
 import { Link } from "react-router-dom";
 import ApplicationLogo from "../Components/ApplicationLogo";
-import { URL } from "../../config/app";
+import api from "../../api/axios";
 
 const LoginAdmin = () => {
   const {
@@ -13,13 +12,13 @@ const LoginAdmin = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const storeData = {
       image: "image here...",
       title: data.title,
       content: data.content,
     };
-    axios.post(`${URL}/admin/login`, storeData).then((res) => {
+    await api.post(`/admin/login`, storeData).then((res) => {
       if (res.data.statusCode === 200) {
         navigator("/");
       } else {
