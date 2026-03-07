@@ -47,7 +47,7 @@ function App() {
       <Route path="/admin/login" element={<LoginAdmin />} />
       {/* <Route path="/register" element={<h1>Register</h1>} /> */}
 
-      {/* Admin Panel [role from backend enum value] Amdin = 0 */}
+      {/* Admin Panel [role from backend enum value] Admin = 0 */}
       <Route
         path="/admin"
         element={

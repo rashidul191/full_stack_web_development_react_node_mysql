@@ -1,0 +1,47 @@
+const { BusinessSetting } = require("../../models/index.js");
+const { createService } = require("../../utility/curd.service.js");
+const { sendSuccess, sendError } = require("../../utility/response.handle.js");
+
+module.exports.index = async (req, res) => {
+  try {
+    const data = await BusinessSetting.findAll({});
+
+    sendSuccess(res, "Business settings", data);
+  } catch (error) {
+    sendError(res, "Can't find data in the database!!", error);
+  }
+};
+
+module.exports.update = async (req, res, next) => {
+  try {
+    const data = req.body;
+
+    for (const key in data) {
+      const setting = await BusinessSetting.findOne({ where: { key } });
+
+      if (setting) {
+        await setting.update({ value: data[key] });
+      } else {
+        await BusinessSetting.create({
+          key: key,
+          value: data[key],
+        });
+      }
+    }
+
+    //  await Promise.all(
+    //   Object.keys(data).map((key) =>
+    //     BusinessSetting.upsert({
+    //       key,
+    //       value: data[key],
+    //     })
+    //   )
+    // );
+
+    sendSuccess(res, "Business settings updated successfully");
+  } catch (error) {
+    console.log(error);
+    next();
+    sendError(res, "Can't Update data!!", error);
+  }
+};

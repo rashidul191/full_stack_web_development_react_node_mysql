@@ -29,7 +29,7 @@ const LabeledInput = (props) => {
 
   return (
     <>
-      <div className="mb-2">
+      <div className={`mb-2 ${className}`}>
         {/* Label */}
         <label htmlFor={name} className="label">
           <span className="label-text text-gray-800 font-semibold">
@@ -57,7 +57,7 @@ const LabeledInput = (props) => {
             type={finalType}
             id={name}
             placeholder={placeholder}
-            className={`w-full border-2 border-gray-600 rounded-md py-1.5 ${type === "password" ? "px-10" : type === "email" ? "pl-10" : "px-1.5"} focus:outline-none focus:ring-2 focus:ring-indigo-500 transition ${className}`}
+            className={`w-full border-2 border-gray-600 rounded-md py-1.5 ${type === "password" ? "px-10" : type === "email" ? "pl-10" : "px-1.5"} focus:outline-none focus:ring-2 focus:ring-indigo-500 transition`}
             {...register(name, {
               required: required ? `${finalLabel} is Required` : false,
               ...(type === "email" && {

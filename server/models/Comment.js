@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "comments", // 👈 এখানে explicitly দিলে
+      tableName: "comments", 
     },
   );
   Comment.associate = function (models) {

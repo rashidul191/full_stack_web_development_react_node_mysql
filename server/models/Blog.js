@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "blogs", // 👈 এখানে explicitly দিলে      
+      tableName: "blogs",     
     },
   );
   Blog.associate = function (models) {
