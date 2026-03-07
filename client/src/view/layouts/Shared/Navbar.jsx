@@ -7,7 +7,7 @@ export default function Navbar(props) {
   const { auth, logoutUser } = props.userInfo;
   const user = auth?.auth;
   return (
-    <nav className="navbar w-full bg-base-300 px-3">
+    <nav className="navbar w-full bg-base-200 shadow px-3">
       {/* Sidebar toggle */}
       <label htmlFor="my-drawer-4" className="btn btn-square btn-ghost">
         <svg

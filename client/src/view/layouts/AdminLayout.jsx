@@ -33,14 +33,14 @@ const AdminLayout = () => {
           </div>
         </div>
 
-        <div className="drawer-side is-drawer-close:overflow-visible">
+        <div className="drawer-side is-drawer-close:overflow-visible shadow-xl">
           <label
             htmlFor="my-drawer-4"
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
           <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
-            <div className="w-full flex justify-end p-3  md:hidden">
+            <div className="w-full flex justify-end p-3 md:hidden">
               <button
                 className="bg-red-500 text-white rounded-full"
                 onClick={() => setDrawerOpen(!drawerOpen)}
@@ -54,8 +54,8 @@ const AdminLayout = () => {
                   class="size-6"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                   />
                 </svg>
