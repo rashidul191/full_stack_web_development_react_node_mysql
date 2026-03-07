@@ -34,9 +34,7 @@ module.exports.login = async (req, res) => {
     if (!isMatch) {
       return sendError(res, "Invalid email or password");
     }
-
     const token = generateToken(auth);
-    console.log(token);
     // 4️⃣ Send success response
     sendSuccess(res, "Login successful", { auth: auth, token: token });
   } catch (error) {

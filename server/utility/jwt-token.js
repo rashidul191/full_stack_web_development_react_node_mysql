@@ -12,8 +12,6 @@ module.exports.generateToken = (auth) => {
     expiresIn: "10d", // 2day
   });
 
-  console.log(token);
-
   // res.cookie("access-token", token, {
   //   httpOnly: true,
   // });

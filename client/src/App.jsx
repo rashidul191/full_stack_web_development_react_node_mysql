@@ -28,11 +28,11 @@ function App() {
       <Route path="/register" element={<RegistrationUser />} />
       <Route path="/forgot-password" element={<h1>Forgot Password</h1>} />
 
-      {/* User Panel */}
+      {/* User Panel [role from backend enum value] User = 1*/}
       <Route
         path="/user"
         element={
-          <PrivateRoute>
+          <PrivateRoute role="1">
             <UserLayout />
           </PrivateRoute>
         }
@@ -41,12 +41,19 @@ function App() {
         <Route path="profile" element={<h1>User Profile</h1>} />
       </Route>
 
-      {/* Admin Auth Route */}
+      {/* Admin Auth Route  */}
       <Route path="/admin/login" element={<LoginAdmin />} />
       {/* <Route path="/register" element={<h1>Register</h1>} /> */}
 
-      {/* Admin Panel */}
-      <Route path="/admin" element={<AdminLayout />}>
+      {/* Admin Panel [role from backend enum value] Amdin = 0 */}
+      <Route
+        path="/admin"
+        element={
+          <PrivateRoute role="0">
+            <AdminLayout />
+          </PrivateRoute>
+        }
+      >
         <Route path="dashboard" element={<h1>Admin Dashboard</h1>} />
         <Route path="users" element={<h1>Manage Users</h1>} />
       </Route>
