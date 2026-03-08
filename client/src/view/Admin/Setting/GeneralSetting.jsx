@@ -6,8 +6,10 @@ import LabeledInput from "../../Components/LabeledInput";
 import SubmitBtn from "../../Components/SubmitBtn";
 import { getBusinessSettings } from "../../../utility/businessSetting";
 import { imageUrl } from "../../../utility/imageUrl";
+import Loading from "../../Common/Loading";
 
 export default function GeneralSetting() {
+  const [loading, setLoading] = useState(true);
   /* Preview Image Hnadle Start */
   const [previewImage, setPreviewImage] = useState({});
   const handleImageChange = (e) => {
@@ -21,6 +23,7 @@ export default function GeneralSetting() {
   };
   /* Preview Image Hnadle End*/
   const [businessSetting, setBusinessSetting] = useState({});
+  console.log(businessSetting);
   const {
     register,
     formState: { errors },
@@ -30,9 +33,11 @@ export default function GeneralSetting() {
 
   useEffect(() => {
     const fetchSettings = async () => {
+      setLoading(true);
       const settings = await getBusinessSettings();
       setBusinessSetting(settings);
       reset(settings); // form field এ value সেট করা
+      setLoading(false);
     };
     fetchSettings();
   }, []);
@@ -53,7 +58,7 @@ export default function GeneralSetting() {
         },
       });
       if (res?.data?.status === "success") {
-        setBusinessSetting(res?.data?.data);
+        // setBusinessSetting(res?.data?.data);
         toast.success(res.data.message);
       }
     } catch (error) {
@@ -61,12 +66,32 @@ export default function GeneralSetting() {
     }
   };
 
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <>
       <h3 className="text-lg font-semibold">General Setting</h3>
       <div className="shadow-md p-4 rounded mt-5">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <div className="w-full md:flex flex-wrap items-end">
+            <div className="w-full md:w-1/2 p-1">
+              <img
+                className="w-12 h-12"
+                src={
+                  previewImage.meta_icon || imageUrl(businessSetting?.meta_icon)
+                }
+                alt=""
+              />
+              <LabeledInput
+                type="file"
+                name="meta_icon"
+                onChange={handleImageChange}
+                register={register}
+                errors={errors}
+              />
+            </div>
             <div className="w-full md:w-1/2 p-1">
               <img
                 className="w-12 h-12"

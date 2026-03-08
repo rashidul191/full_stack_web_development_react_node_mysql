@@ -21,8 +21,12 @@ module.exports.update = async (req, res, next) => {
 
     // file handle
     if (req.files) {
-      req.files.forEach((file) => {
-        data[file.fieldname] = imageHandler.store(file);
+      req.files.forEach(async (file) => {
+        // data[file.fieldname] = imageHandler.store(file);
+        const key = file.fieldname;
+        const setting = await BusinessSetting.findOne({ where: { key } });
+        const oldPath = setting ? setting.value : null;
+        data[key] = imageHandler.update(oldPath, file);
       });
     }
 
