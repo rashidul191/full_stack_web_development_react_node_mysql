@@ -12,6 +12,7 @@ const LabeledInput = (props) => {
     errors,
     watch,
     className = "",
+    onChange,
   } = props;
   // Auto format label from name
   const nameText = name
@@ -31,7 +32,7 @@ const LabeledInput = (props) => {
     <>
       <div className={`mb-2 ${className}`}>
         {/* Label */}
-        <label htmlFor={name} className="label">
+        <label htmlFor={name} className="label mb-0.5">
           <span className="label-text text-gray-800 font-semibold">
             {finalLabel}
             {required && <span className="text-red-500 ml-1">*</span>}
@@ -57,7 +58,7 @@ const LabeledInput = (props) => {
             type={finalType}
             id={name}
             placeholder={placeholder}
-            className={`w-full border-2 border-gray-600 rounded-md py-1.5 ${type === "password" ? "px-10" : type === "email" ? "pl-10" : "px-1.5"} focus:outline-none focus:ring-2 focus:ring-indigo-500 transition`}
+            className={`w-full border-2 border-gray-600 rounded-md py-1.5 ${type === "password" ? "px-10" : type === "email" ? "pl-10" : "px-2"} focus:outline-none focus:ring-2 focus:ring-indigo-500 transition`}
             {...register(name, {
               required: required ? `${finalLabel} is Required` : false,
               ...(type === "email" && {
@@ -81,6 +82,10 @@ const LabeledInput = (props) => {
                   validate: (value) =>
                     value === watch("password") || "Passwords do not match",
                 }),
+
+              onChange: (e) => {
+                onChange && onChange(e); // 👈 preview trigger
+              },
             })}
           />
 

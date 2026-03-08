@@ -16,6 +16,8 @@ const {
   deleteService,
 } = require("../../../utility/curd.service.js");
 const { generateToken } = require("../../../utility/jwt-token.js");
+const ImageFile = require("../../../lib/ImageFile.js");
+const imageHandler = new ImageFile("admins");
 
 module.exports.login = async (req, res) => {
   try {
@@ -83,6 +85,7 @@ module.exports.register = async (req, res, next) => {
       email,
       password, // password hash form model
       role: role ?? Roles.ADMIN,
+      avatar: req.file ? imageHandler.store(req.file) : null,
     };
 
     const authCreated = await createService(Admin, newAuthData);

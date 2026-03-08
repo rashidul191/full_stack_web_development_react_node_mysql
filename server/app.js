@@ -9,7 +9,8 @@ dotenv.config();
 app.use(cors());
 
 // file path
-app.use("/uploads", express.static("public/uploads"));
+app.use(express.static("public"));
+app.use("/api/uploads", express.static("public/uploads"));
 
 // Web Routes
 const blogRoutes = require("./routes/web/blog.route");

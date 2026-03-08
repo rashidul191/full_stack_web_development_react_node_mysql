@@ -1,6 +1,8 @@
 const { BusinessSetting } = require("../../models/index.js");
 const { createService } = require("../../utility/curd.service.js");
 const { sendSuccess, sendError } = require("../../utility/response.handle.js");
+const ImageFile = require("../../lib/ImageFile.js");
+const imageHandler = new ImageFile("business-settings");
 
 module.exports.index = async (req, res) => {
   try {
@@ -15,10 +17,17 @@ module.exports.index = async (req, res) => {
 module.exports.update = async (req, res, next) => {
   try {
     const data = req.body;
+    console.log(data);
+
+    // file handle
+    if (req.files) {
+      req.files.forEach((file) => {
+        data[file.fieldname] = imageHandler.store(file);
+      });
+    }
 
     for (const key in data) {
       const setting = await BusinessSetting.findOne({ where: { key } });
-
       if (setting) {
         await setting.update({ value: data[key] });
       } else {
@@ -38,7 +47,7 @@ module.exports.update = async (req, res, next) => {
     //   )
     // );
 
-    sendSuccess(res, "Business settings updated successfully");
+    sendSuccess(res, "Updated successfully");
   } catch (error) {
     console.log(error);
     next();

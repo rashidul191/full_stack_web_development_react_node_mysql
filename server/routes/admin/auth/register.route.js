@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const adminAuthController = require("../../../controllers/admin/auth/auth.controller");
+const uploadFile = require("../../../middleware/upload.middleware");
 
-router.post("/", adminAuthController.register); // create
+const upload = uploadFile("admins");
 
+router.post("/", upload.single("avatar"), adminAuthController.register); // create
 
 // router.get("/", authController.index); // index
 // router.post("/", authController.create); // create

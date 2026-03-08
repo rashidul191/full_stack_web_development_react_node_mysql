@@ -18,7 +18,7 @@ const RegistrationUser = () => {
     handleSubmit,
   } = useForm();
   const onSubmit = async (data) => {
-    const storeData = {
+    const formData = {
       username: data.username,
       name: data.name,
       email: data.email,
@@ -27,16 +27,15 @@ const RegistrationUser = () => {
     };
 
     try {
-      await api.post(`/register`, storeData).then((res) => {
-        // console.log(res?.data?.status === "success");
-        if (res?.data?.status === "success") {
-          registerUser(res?.data?.data);
-          // navigator("/");
-          toast.success(res.data.message);
+      const res = await api.post(`/register`, formData);
 
-          navigator("/user/dashboard");
-        }
-      });
+      if (res?.data?.status === "success") {
+        registerUser(res?.data?.data);
+        // navigator("/");
+        toast.success(res.data.message);
+
+        navigator("/user/dashboard");
+      }
     } catch (error) {
       toast.error(error.response?.data?.message);
     }

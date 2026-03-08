@@ -12,8 +12,9 @@ import LoginUser from "./view/Auth/LoginUser";
 import RegistrationUser from "./view/Auth/RegistrationUser";
 import LoginAdmin from "./view/Auth/LoginAdmin";
 import PrivateRoute from "./routes/PrivateRoute";
-import { ROLES } from "./utility/roles";
+
 import GeneralSetting from "./view/Admin/Setting/GeneralSetting";
+import { ROLES } from "./utility/roles";
 
 function App() {
   return (
