@@ -18,6 +18,21 @@ const AdminSidebar = () => {
       icon: MdDashboard,
     },
     {
+      title: "Blog",
+      basePath: "/admin",
+      icon: MdSettings,
+      children: [
+        {
+          title: "Blog List",
+          path: "/blog",
+        },
+        {
+          title: "Categories",
+          path: "/categories",
+        },
+      ],
+    },
+    {
       title: "Settings",
       basePath: "/admin/setting",
       icon: MdSettings,

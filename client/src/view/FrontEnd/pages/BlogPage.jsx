@@ -9,7 +9,7 @@ import LabeledTextarea from "../../Components/LabeledTextarea";
 import SubmitBtn from "../../Components/SubmitBtn";
 import { useNavigate } from "react-router-dom";
 
-const Blog = () => {
+const BlogPage = () => {
   const {
     register,
     formState: { errors },
@@ -29,7 +29,6 @@ const Blog = () => {
       }
     });
   };
-
 
   const [blogs, setBlogs] = useState([]);
 
@@ -97,14 +96,13 @@ const Blog = () => {
             >
               Details
             </button>
-            
+
             {/* <button
               className="bg-red-500 text-white px-4 py-2 rounded"
               onClick={}
             >
               Delete
             </button> */}
-
           </div>
         ))}
       </div>
@@ -112,4 +110,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default BlogPage;

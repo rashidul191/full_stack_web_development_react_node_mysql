@@ -41,7 +41,6 @@ export default function GeneralSetting() {
     };
     fetchSettings();
   }, []);
-
   const onSubmit = async (data) => {
     const formData = createFormData(data); // helper function with image manage
     try {

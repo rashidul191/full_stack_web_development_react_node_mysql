@@ -5,7 +5,6 @@ import FrontLayout from "./view/layouts/FrontLayout";
 import UserLayout from "./view/layouts/UserLayout";
 import AdminLayout from "./view/layouts/AdminLayout";
 import Home from "./view/FrontEnd/Pages/Home";
-import Blogs from "./view/FrontEnd/Pages/Blogs";
 import NotFound from "./view/FrontEnd/Pages/NotFound";
 import BlogDetails from "./view/FrontEnd/Pages/BlogDetails";
 import LoginUser from "./view/Auth/LoginUser";
@@ -16,6 +15,9 @@ import PrivateRoute from "./routes/PrivateRoute";
 import GeneralSetting from "./view/Admin/Setting/GeneralSetting";
 import { ROLES } from "./utility/roles";
 import SocialLinks from "./view/Admin/Setting/SocialLinks";
+import BlogPage from "./view/FrontEnd/pages/BlogPage";
+import BlogIndex from "./view/Admin/Blog/BlogIndex";
+import BlogForm from "./view/Admin/Blog/BlogForm";
 
 function App() {
   return (
@@ -23,7 +25,7 @@ function App() {
       {/* FrontEnd Layout */}
       <Route element={<FrontLayout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/blog" element={<Blogs />} />
+        <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:id" element={<BlogDetails />} />
       </Route>
 
@@ -59,7 +61,12 @@ function App() {
         }
       >
         <Route path="dashboard" element={<h1>Admin Dashboard</h1>} />
-        <Route path="users" element={<h1>Manage Users</h1>} />
+        <Route path="blog">
+          <Route path="" element={<BlogIndex />} />
+          <Route path="create" element={<BlogForm />} />
+          <Route path="edit/:id" element={<BlogForm />} />
+        </Route>
+
         <Route path="setting">
           <Route path="general" element={<GeneralSetting />} />
           <Route path="social-links" element={<SocialLinks />} />
