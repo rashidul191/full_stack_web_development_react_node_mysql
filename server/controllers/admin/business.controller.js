@@ -8,7 +8,7 @@ module.exports.index = async (req, res) => {
   try {
     const data = await BusinessSetting.findAll({});
 
-    sendSuccess(res, "Business settings", data);
+    sendSuccess(res, "Find data successfully", data);
   } catch (error) {
     sendError(res, "Can't find data in the database!!", error);
   }

@@ -13,7 +13,7 @@ const {
 module.exports.index = async (req, res) => {
   try {
     const result = await indexService(Category);
-    sendSuccess(res, "Find All successful", result);
+    sendSuccess(res, "Find all data successful", result);
   } catch (error) {
     sendError(res, "Can't find data in the database!!", error);
   }
