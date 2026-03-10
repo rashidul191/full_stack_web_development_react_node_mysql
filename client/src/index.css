@@ -1,2 +1,203 @@
-@import "tailwindcss";
-@plugin "daisyui";
+/* @import "tailwindcss";
+@plugin "daisyui"; */
+
+/*=======================
+ BackEnd Style Start 
+ ========================*/
+/* =========================
+   Backend Layout
+========================= */
+
+.backend-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f6fa;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================
+   Sidebar
+========================= */
+
+.backend-layout .sidebar {
+  width: 250px;
+  background: #1f2937;
+  color: #ffffff;
+  transition: 0.3s;
+}
+
+.backend-layout .sidebar.closed {
+  width: 0;
+  overflow: hidden;
+}
+
+/* sidebar header */
+
+.backend-layout .sidebar .sidebar-header {
+  padding: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* sidebar menu */
+
+.backend-layout .sidebar .sidebar-menu {
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+}
+
+.backend-layout .sidebar .sidebar-menu li {
+  padding: 12px 20px;
+  cursor: pointer;
+}
+
+.backend-layout .sidebar .sidebar-menu li:hover {
+  background: #374151;
+}
+
+/* =========================
+   Main Content
+========================= */
+
+.backend-layout .backend-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Navbar */
+
+.backend-layout .navbar {
+  height: 60px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 20px;
+
+  position: relative;
+  overflow: visible;
+}
+
+/* left */
+
+.backend-layout .navbar .navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+/* toggle button */
+
+.backend-layout .navbar .sidebar-toggle {
+  border: none;
+  background: black;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* right */
+
+.backend-layout .navbar .navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* avatar dropdown */
+
+.backend-layout .navbar .avatar-dropdown {
+  position: relative;
+}
+
+/* avatar trigger */
+
+.backend-layout .navbar .avatar-trigger {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* avatar image */
+
+.backend-layout .navbar .avatar-dropdown img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+/* user info */
+
+.backend-layout .navbar .avatar-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.backend-layout .navbar .avatar-info .user-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.backend-layout .navbar .avatar-info .user-role {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* dropdown */
+
+.backend-layout .navbar .dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 50px;
+
+  width: 160px;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+
+  list-style: none;
+  padding: 5px 0;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+/* dropdown item */
+
+.backend-layout .navbar .dropdown-menu li {
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* hover */
+
+.backend-layout .navbar .dropdown-menu li:hover {
+  background: #f3f4f6;
+}
+
+/* divider */
+
+.backend-layout .navbar .dropdown-menu .divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 5px 0;
+}
+
+/* =========================
+   Body
+========================= */
+
+.backend-layout .backend-body {
+  flex: 1;
+  padding: 25px;
+  background: #f5f6fa;
+}
+/*=======================
+ BackEnd Style End 
+ ========================*/

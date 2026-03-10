@@ -2,15 +2,9 @@ import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { MdDashboard, MdSettings } from "react-icons/md";
 
-const navClass = ({ isActive }) =>
-  `flex items-center gap-2 hover:bg-gray-600 hover:text-white ${
-    isActive ? "bg-gray-600 text-white" : ""
-  }`;
-
-const AdminSidebar = () => {
+const AdminSidebar = ({ sidebarOpen }) => {
   const location = useLocation();
 
-  // Sidebar Menu Config
   const sidebarMenus = [
     {
       title: "Dashboard",
@@ -22,14 +16,8 @@ const AdminSidebar = () => {
       basePath: "/admin",
       icon: MdSettings,
       children: [
-        {
-          title: "Blog List",
-          path: "/blog",
-        },
-        {
-          title: "Categories",
-          path: "/category",
-        },
+        { title: "Blog List", path: "/blog" },
+        { title: "Categories", path: "/category" },
       ],
     },
     {
@@ -37,75 +25,67 @@ const AdminSidebar = () => {
       basePath: "/admin/setting",
       icon: MdSettings,
       children: [
-        {
-          title: "General Setting",
-          path: "/general",
-        },
-        {
-          title: "Social Links",
-          path: "/social-links",
-        },
-        {
-          title: "Profile Setting",
-          path: "/profile",
-        },
+        { title: "General Setting", path: "/general" },
+        { title: "Social Links", path: "/social-links" },
+        { title: "Profile Setting", path: "/profile" },
       ],
     },
   ];
 
   return (
-    <ul className="menu w-full grow">
-      {sidebarMenus.map((menu, index) => {
-        const Icon = menu.icon;
+    <div
+      className="sidebar"
+      style={{
+        width: sidebarOpen ? "250px" : "0px",
+      }}
+    >
+      <div className="sidebar-header">Admin Panel</div>
 
-        const isActive = menu.basePath
-          ? location.pathname.startsWith(menu.basePath)
-          : false;
+      <ul className="sidebar-menu">
+        {sidebarMenus.map((menu, index) => {
+          const Icon = menu.icon;
 
-        // Normal Menu
-        if (!menu.children) {
+          const isActive = menu.basePath
+            ? location.pathname.startsWith(menu.basePath)
+            : false;
+
+          if (!menu.children) {
+            return (
+              <li key={index}>
+                <NavLink to={menu.path} className="sidebar-link">
+                  {Icon && <Icon />}
+                  <span>{menu.title}</span>
+                </NavLink>
+              </li>
+            );
+          }
+
           return (
             <li key={index}>
-              <NavLink to={menu.path} className={navClass}>
-                {Icon && <Icon className="text-lg" />}
-                <span>{menu.title}</span>
-              </NavLink>
-            </li>
-          );
-        }
-
-        // Dropdown Menu
-        return (
-          <li key={index}>
-            <details open={isActive}>
-              <summary className="flex items-center justify-between gap-2">
-                <span className="flex space-x-2">
-                  {Icon && <Icon className="text-lg" />}
+              <details open={isActive}>
+                <summary className="sidebar-link">
+                  {Icon && <Icon />}
                   <span>{menu.title}</span>
-                </span>
-              </summary>
+                </summary>
 
-              <ul>
-                {menu.children.map((child, i) => {
-                  const ChildIcon = child.icon;
-                  return (
+                <ul className="sidebar-submenu">
+                  {menu.children.map((child, i) => (
                     <li key={i}>
                       <NavLink
-                        to={menu.basePath + "" + child.path}
-                        className={navClass}
+                        to={menu.basePath + child.path}
+                        className="sidebar-sublink"
                       >
-                        {ChildIcon && <ChildIcon className="text-lg" />}
-                        <span>{child.title}</span>
+                        {child.title}
                       </NavLink>
                     </li>
-                  );
-                })}
-              </ul>
-            </details>
-          </li>
-        );
-      })}
-    </ul>
+                  ))}
+                </ul>
+              </details>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 };
 
