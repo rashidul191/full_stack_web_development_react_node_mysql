@@ -120,4 +120,33 @@ export const useApiHook = (url = null) => {
     refetch: () => getData(url),
   };
 };
-export default { useImagePreview, useApiHook };
+
+export const useCss = (href) => {
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = href;
+
+    document.head.appendChild(link);
+
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, [href]);
+};
+
+export const useScript = (src) => {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.async = true;
+
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, [src]);
+};
+
+export default { useImagePreview, useApiHook, useCss, useScript };

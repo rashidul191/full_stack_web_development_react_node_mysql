@@ -1,20 +1,28 @@
-
 import React from "react";
-import '../FrontEnd/assets/css/flaticon.css';
-import '../FrontEnd/assets/css/all.min.css';
-import '../FrontEnd/assets/css/themify-icons.css';
-import '../FrontEnd/assets/css/animate.min.css';
-import '../FrontEnd/assets/css/style.css';
-import '../FrontEnd/assets/css/swiper-bundle.min.css';
-import '../FrontEnd/assets/css/glightbox.min.css';
-import '../FrontEnd/assets/css/aos.css';
-  
-
 import { Outlet } from "react-router-dom";
 import Navbar from "../FrontEnd/Common/Navbar";
 import Footer from "../FrontEnd/Common/Footer";
+import { useCss, useScript } from "../../hook/customHook";
 
 const FrontLayout = () => {
+  let cssAssets = [
+    "/flaticon.css",
+    "/all.min.css",
+    "/themify-icons.css",
+    "/animate.min.css",
+    "/style.css",
+    "/swiper-bundle.min.css",
+  ];
+  for (const value of cssAssets) {
+    useCss(`front-end/assets/css${value}`);
+  }
+
+  let jsAssets = ["/swiper-bundle.min.js", "/main.js"];
+
+  for (const value of jsAssets) {
+    useScript(`front-end/assets/js${value}`);
+  }
+
   return (
     <>
       <Navbar />

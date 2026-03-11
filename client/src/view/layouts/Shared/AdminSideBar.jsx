@@ -2,90 +2,105 @@ import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { MdDashboard, MdSettings } from "react-icons/md";
 
-const AdminSidebar = ({ sidebarOpen }) => {
+const navClass = ({ isActive }) =>
+  `flex items-center gap-2 hover:bg-gray-600 hover:text-white ${
+    isActive ? "bg-gray-600 text-white" : ""
+  }`;
+
+const AdminSidebar = () => {
   const location = useLocation();
 
   const sidebarMenus = [
     {
       title: "Dashboard",
-      path: "dashboard",
+      path: "/admin/dashboard",
       icon: MdDashboard,
     },
     {
       title: "Blog",
-      basePath: "/admin",
       icon: MdSettings,
       children: [
-        { title: "Blog List", path: "/blog" },
-        { title: "Categories", path: "/category" },
+        {
+          title: "Blog List",
+          path: "/admin/blog",
+        },
+        {
+          title: "Categories",
+          path: "/admin/category",
+        },
       ],
     },
     {
       title: "Settings",
-      basePath: "/admin/setting",
       icon: MdSettings,
       children: [
-        { title: "General Setting", path: "/general" },
-        { title: "Social Links", path: "/social-links" },
-        { title: "Profile Setting", path: "/profile" },
+        {
+          title: "General Setting",
+          path: "/admin/setting/general",
+        },
+        {
+          title: "Social Links",
+          path: "/admin/setting/social-links",
+        },
+        {
+          title: "Profile Setting",
+          path: "/admin/setting/profile",
+        },
       ],
     },
   ];
 
   return (
-    <div
-      className="sidebar"
-      style={{
-        width: sidebarOpen ? "250px" : "0px",
-      }}
-    >
-      <div className="sidebar-header">Admin Panel</div>
+    <ul className="menu p-2 w-full text-base-content">
+      {sidebarMenus.map((menu, index) => {
+        const Icon = menu.icon;
 
-      <ul className="sidebar-menu">
-        {sidebarMenus.map((menu, index) => {
-          const Icon = menu.icon;
-
-          const isActive = menu.basePath
-            ? location.pathname.startsWith(menu.basePath)
-            : false;
-
-          if (!menu.children) {
-            return (
-              <li key={index}>
-                <NavLink to={menu.path} className="sidebar-link">
-                  {Icon && <Icon />}
-                  <span>{menu.title}</span>
-                </NavLink>
-              </li>
-            );
-          }
-
+        // Menu without dropdown
+        if (!menu.children) {
           return (
             <li key={index}>
-              <details open={isActive}>
-                <summary className="sidebar-link">
-                  {Icon && <Icon />}
-                  <span>{menu.title}</span>
-                </summary>
-
-                <ul className="sidebar-submenu">
-                  {menu.children.map((child, i) => (
-                    <li key={i}>
-                      <NavLink
-                        to={menu.basePath + child.path}
-                        className="sidebar-sublink"
-                      >
-                        {child.title}
-                      </NavLink>
-                    </li>
-                  ))}
-                </ul>
-              </details>
+              <NavLink
+                to={menu.path}
+                className={`${navClass} is-drawer-close:tooltip is-drawer-close:tooltip-right`}
+              >
+                <Icon size={20} />
+                <span className="is-drawer-close:hidden">{menu.title}</span>
+              </NavLink>
             </li>
           );
-        })}
-      </ul>
-    </div>
+        }
+
+        // Menu with dropdown
+        return (
+          <li key={index}>
+            <details
+              open={menu.children.some((child) =>
+                location.pathname.startsWith(child.path),
+              )}
+            >
+              <summary className="flex items-center justify-between w-full gap-3 is-drawer-close:tooltip is-drawer-close:tooltip-right">
+                <div className="flex">
+                  <Icon size={20} />
+                  <span className="is-drawer-close:hidden ms-2">
+                    {menu.title}
+                  </span>
+                </div>
+              </summary>
+
+              <ul className="is-drawer-close:hidden">
+                {menu.children.map((child, i) => (
+                  <li key={i}>
+                    <NavLink to={child.path} className={`ms-2 ${navClass}`}>
+                      {child.title}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          </li>
+        );
+      })}
+    </ul>
   );
 };
 
