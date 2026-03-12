@@ -1,5 +1,6 @@
-const { Roles } = require("../constants/enums/roles.enum.js");
+
 const bcrypt = require("bcrypt");
+const { Roles } = require("../constants/enums/Roles.enum");
 ("use strict");
 
 /** @type {import('sequelize-cli').Migration} */
@@ -23,7 +24,7 @@ module.exports = {
           email: "admin@gmail.com",
           phone: "01811111111",
           password: await bcrypt.hash("12345678", 10),
-          role: Roles.ADMIN,
+          role: Roles.Admin,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

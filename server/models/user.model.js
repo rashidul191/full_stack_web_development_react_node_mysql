@@ -1,6 +1,6 @@
 const { Model } = require("sequelize");
 const bcrypt = require("bcrypt"); // for password
-const { Roles } = require("../constants/enums/roles.enum.js");
+const { Roles } = require("../constants/enums/Roles.enum");
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -62,16 +62,16 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       role: {
-        type: DataTypes.TINYINT,
+        type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: Roles.NONE,
+        defaultValue: Roles.User,
         validate: {
           isIn: [Object.values(Roles)],
         },
       },
 
       referrer_id: {
-        type: DataTypes.TINYINT,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
     },

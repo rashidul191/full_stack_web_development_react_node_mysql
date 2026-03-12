@@ -1,5 +1,5 @@
-const { Roles } = require("../constants/enums/roles.enum.js");
 const bcrypt = require("bcrypt");
+const { Roles } = require("../constants/enums/Roles.enum");
 
 ("use strict");
 
@@ -24,7 +24,7 @@ module.exports = {
           email: "user@gmail.com",
           phone: "01711111111",
           password: await bcrypt.hash("12345678", 10),
-          role: Roles.USER,
+          role: Roles.User,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
