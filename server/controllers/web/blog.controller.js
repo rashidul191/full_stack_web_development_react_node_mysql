@@ -23,7 +23,7 @@ module.exports.create = async (req, res, next) => {
     const data = await createService(Blog, req.body);
     sendSuccess(res, "Successfully create data!!", data);
   } catch (error) {
-    next();
+    next(error);
     sendError(res, "Can't create data!!", error);
   }
 };

@@ -2,6 +2,7 @@
   "name": "client",
   "private": true,
   "version": "1.0.0",
+  "description": "MERN Stack App Development By Rashidul Islam",
   "type": "module",
   "scripts": {
     "dev": "vite",

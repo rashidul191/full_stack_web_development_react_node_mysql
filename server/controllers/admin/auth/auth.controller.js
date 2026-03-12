@@ -6,7 +6,7 @@ const {
   sendError,
 } = require("../../../utility/response.handle.js");
 
-const { Roles } = require("../../../constants/enums/roles.enum.js");
+const { Roles } = require("../../../constants/enums/Roles.enum.js");
 
 const {
   indexService,
@@ -96,7 +96,7 @@ module.exports.register = async (req, res, next) => {
       token: token,
     });
   } catch (error) {
-    next();
+    next(error);
     sendError(res, "Can't create data!!", error);
   }
 };

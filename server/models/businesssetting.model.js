@@ -13,7 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "business-settings",
+      sequelize,
+      modelName: "BusinessSetting",
+      tableName: "business_settings",
     },
   );
 

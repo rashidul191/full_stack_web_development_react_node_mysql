@@ -1,6 +1,6 @@
 import React from "react";
 import defaultAvatar from "../../../../src/assets/avatar.png";
-import { getRoleName } from "../../../utility/roles";
+import { getRoleName } from "../../../enum/Roles";
 
 export default function Navbar({ userInfo, toggleDrawer }) {
   const { auth, logoutUser } = userInfo;
@@ -49,7 +49,7 @@ export default function Navbar({ userInfo, toggleDrawer }) {
               <div className="hidden md:block text-left">
                 <p className="font-semibold leading-none">{user?.name}</p>
                 <span className="text-xs opacity-70">
-                  {getRoleName(user?.role)}
+                  {getRoleName[user?.role]}
                 </span>
               </div>
             </div>

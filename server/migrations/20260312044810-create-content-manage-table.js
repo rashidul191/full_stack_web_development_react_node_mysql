@@ -2,19 +2,19 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("blogs", {
+    await queryInterface.createTable("content_manages", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      category_id: {
+      menu_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
-          model: "Categories",
-          key: "id",
+          model: "menus", // table name
+          key: "id", // column name
         },
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
@@ -26,11 +26,25 @@ module.exports = {
       slug: {
         type: Sequelize.STRING,
         unique: true,
-        allowNull: false,
       },
-      image: Sequelize.STRING,
-      short_description: Sequelize.TEXT,
-      description: Sequelize.TEXT("long"),
+
+      short_description: {
+        type: Sequelize.TEXT,
+      },
+      description: {
+        type: Sequelize.TEXT("long"),
+      },
+
+      meta_title: {
+        type: Sequelize.STRING,
+      },
+      meta_keywords: {
+        type: Sequelize.TEXT("long"),
+      },
+      meta_description: {
+        type: Sequelize.TEXT("long"),
+      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -42,6 +56,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("blogs");
+    await queryInterface.dropTable("content_manages");
   },
 };

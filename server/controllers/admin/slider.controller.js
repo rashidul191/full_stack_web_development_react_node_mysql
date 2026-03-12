@@ -27,7 +27,7 @@ module.exports.create = async (req, res, next) => {
     const result = await createService(Slider, data);
     sendSuccess(res, "Successfully create Slider!", result);
   } catch (error) {
-    next();
+    next(error);
     console.log("create: ", error);
     sendError(res, "Can't create data!!", error);
   }
@@ -65,7 +65,7 @@ module.exports.delete = async (req, res, next) => {
   try {
     sendSuccess(res, "Delete successfully!!", result);
   } catch (error) {
-    next();
+    next(error);
     sendError(res, "Can't delete data!!", error);
   }
 };

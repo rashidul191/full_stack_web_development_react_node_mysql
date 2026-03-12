@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.Category.hasMany(models.Blog, {
+      Category.hasMany(models.Blog, {
         foreignKey: "category_id",
         as: "blogs",
         // onDelete: "CASCADE", // categor delete হলে comment গুলোও delete হবে

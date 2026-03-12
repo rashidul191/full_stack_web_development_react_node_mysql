@@ -1,6 +1,6 @@
 const app = require("./app");
 const db = require("./models");
-const port = 5000;
+const port = process.env.PORT ?? 5000;
 
 // default error handler
 

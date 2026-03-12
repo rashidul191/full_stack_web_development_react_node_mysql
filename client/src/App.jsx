@@ -11,7 +11,7 @@ import LoginAdmin from "./view/Auth/LoginAdmin";
 import PrivateRoute from "./routes/PrivateRoute";
 
 import GeneralSetting from "./view/Admin/Setting/GeneralSetting";
-import { ROLES } from "./utility/roles";
+import { ROLES } from "./enum/Roles";
 import SocialLinks from "./view/Admin/Setting/SocialLinks";
 import BlogPage from "./view/FrontEnd/pages/BlogPage";
 import BlogIndex from "./view/Admin/Blog/BlogIndex";
@@ -22,6 +22,11 @@ import SliderIndex from "./view/Admin/Slider/SliderIndex";
 import SliderForm from "./view/Admin/Slider/SliderForm";
 import ReviewIndex from "./view/Admin/Review/ReviewIndex";
 import ReviewForm from "./view/Admin/Review/ReviewForm";
+import AdminDashboard from "./view/Admin/AdminDashboard";
+import MenuIndex from "./view/Admin/Menu/MenuIndex";
+import MenuForm from "./view/Admin/Menu/MenuForm";
+import SubMenuIndex from "./view/Admin/SubMenu/SubMenuIndex";
+import SubMenuForm from "./view/Admin/SubMenu/SubMenuForm";
 
 function App() {
   return (
@@ -64,8 +69,18 @@ function App() {
           // </PrivateRoute>
         }
       >
-        <Route path="dashboard" element={<h1>Admin Dashboard</h1>} />
+        <Route path="dashboard" element={<AdminDashboard></AdminDashboard>} />
 
+        <Route path="menu">
+          <Route path="" element={<MenuIndex />} />
+          <Route path="create" element={<MenuForm />} />
+          <Route path="edit/:id" element={<MenuForm />} />
+        </Route>
+        <Route path="sub-menu">
+          <Route path="" element={<SubMenuIndex />} />
+          <Route path="create" element={<SubMenuForm />} />
+          <Route path="edit/:id" element={<SubMenuForm />} />
+        </Route>
         <Route path="slider">
           <Route path="" element={<SliderIndex />} />
           <Route path="create" element={<SliderForm />} />

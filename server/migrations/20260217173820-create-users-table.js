@@ -1,5 +1,5 @@
 "use strict";
-const { Roles } = require("../constants/enums/roles.enum.js");
+const { Roles } = require("../constants/enums/Roles.enum.js");
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -46,7 +46,7 @@ module.exports = {
       role: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        defaultValue: Roles.USER,
+        defaultValue: Roles.User,
       },
 
       referrer_id: {

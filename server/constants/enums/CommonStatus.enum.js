@@ -1,9 +1,6 @@
-const Roles = {
-  None: 0,
-  Admin: 1,
-  User: 2,
-  Manager: 3,
-  Seller: 4,
+const CommonStatus = {
+  InActive: 0,
+  Active: 1,
 
   // isValid(value) {
   //   return [0, 1, 2, 3].includes(value);
@@ -14,6 +11,6 @@ const Roles = {
   // },
 };
 
-Object.freeze(Roles);
+Object.freeze(CommonStatus);
 
-module.exports = { Roles };
+module.exports = { CommonStatus };

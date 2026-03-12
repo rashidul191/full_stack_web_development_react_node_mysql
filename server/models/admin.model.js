@@ -63,7 +63,6 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: "Admin",
       tableName: "admins",
-      timestamps: true,
       hooks: {
         beforeCreate: async (admin) => {
           admin.password = await bcrypt.hash(admin.password, 10);

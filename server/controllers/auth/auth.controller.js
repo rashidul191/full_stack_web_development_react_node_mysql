@@ -2,7 +2,7 @@ const { User } = require("../../models/index.js");
 const bcrypt = require("bcrypt");
 const { sendSuccess, sendError } = require("../../utility/response.handle.js");
 
-const { Roles } = require("../../constants/enums/roles.enum.js");
+const { Roles } = require("../../constants/enums/Roles.enum.js");
 const { generateToken } = require("../../utility/jwt-token.js");
 
 const ImageFile = require("../../lib/ImageFile.js");
@@ -92,7 +92,7 @@ module.exports.register = async (req, res, next) => {
       token: token,
     });
   } catch (error) {
-    next();
+    next(error);
     sendError(res, "Can't create data!!", error);
   }
 };
@@ -156,7 +156,7 @@ module.exports.update = async (req, res, next) => {
 
     sendSuccess(res, "User updated successfully!!", updatedUser);
   } catch (error) {
-    next();
+    next(error);
     sendError(res, "Can't update user!!", error);
   }
 };

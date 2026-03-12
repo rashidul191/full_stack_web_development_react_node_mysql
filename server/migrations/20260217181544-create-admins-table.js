@@ -1,5 +1,5 @@
 "use strict";
-const { Roles } = require("../constants/enums/roles.enum.js");
+const { Roles } = require("../constants/enums/Roles.enum.js");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -38,7 +38,7 @@ module.exports = {
       role: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: Roles.NONE,
+        defaultValue: Roles.None,
       },
       // 🔥 IMPORTANT FIX
       createdAt: {

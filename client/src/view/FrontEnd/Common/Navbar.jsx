@@ -1,13 +1,19 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
+import ApplicationLogo from "../../Components/ApplicationLogo";
+import { useApiHook } from "../../../hook/customHook";
 
 const Navbar = () => {
-  const userInfo = useContext(AuthContext);
+  // const userInfo = useContext(AuthContext);
   // const email = userInfo?.auth?.auth?.email;
-  const { auth, logoutUser } = userInfo;
+  const { data: menus } = useApiHook("/admin/menu");
+  const topMenus = menus
+    ?.sort((a, b) => a.serial - b.serial)
+    ?.filter((item) => item.parent_id === null);
+  // const { auth, logoutUser } = userInfo;
 
-  console.log(auth);
+  console.log(menus);
 
   const menuLinks = (
     <>
@@ -15,27 +21,50 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
 
-      <li>
-        <details>
-          <summary>Parent</summary>
-          <ul className="p-2 bg-base-100 w-40 z-1">
-            <li>
-              <a>Submenu 1</a>
-            </li>
-            <li>
-              <a>Submenu 2</a>
-            </li>
-          </ul>
-        </details>
-      </li>
+      {topMenus
+        ?.sort((a, b) => a.serial - b.serial)
+        ?.map((item) => (
+          <li>
+            <NavLink to={item?.slug}>{item?.name}</NavLink>
+            {item?.children?.length > 0 ? (
+              <ul className="submenu">
+                <li>
+                  {item?.children
+                    ?.sort((x, y) => x.serial - y.serial)
+                    ?.map((subMenu) => (
+                      <NavLink to={`${item.slug}/${subMenu.slug}`}>
+                        {subMenu?.name}
+                      </NavLink>
+                    ))}
+                </li>
+              </ul>
+            ) : (
+              ""
+            )}
+          </li>
+        ))}
 
       <li>
-        <NavLink to="/about">About</NavLink>
+        <a href="https://preview.colorlib.com/theme/consultingbiz/contact.html">
+          Contact
+        </a>
+        {/* <ul className="submenu">
+          <li>
+            <a href="https://preview.colorlib.com/theme/consultingbiz/contact.html">
+              Contact
+            </a>
+          </li>
+          <li>
+            <a href="https://preview.colorlib.com/theme/consultingbiz/careers.html">
+              Careers
+            </a>
+          </li>
+        </ul> */}
       </li>
     </>
   );
 
-  console.log(menuLinks, logoutUser);
+  // console.log(menuLinks, logoutUser);
 
   return (
     <>
@@ -58,7 +87,7 @@ const Navbar = () => {
       </div> */}
       <header>
         <div className="header-area">
-          <div className="main-header ">
+          <div className="main-header">
             <div className="header-top d-none d-lg-block">
               <div className="container">
                 <div className="row align-items-center">
@@ -102,110 +131,30 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
+
             <div className="header-bottom  header-sticky">
               <div className="container">
                 <div className="row align-items-center">
                   <div className="col-xl-2 col-lg-2">
                     <div className="logo">
-                      <a
-                        href="https://preview.colorlib.com/theme/consultingbiz/index.html"
-                        aria-label="ConsultingBiz Home"
-                      >
-                        <img
+                      <NavLink to="/">
+                        {/* <img
                           src="https://preview.colorlib.com/theme/consultingbiz/assets/img/logo/logo.webp"
-                          alt="ConsultingBiz"
+                          alt=""
                           width="150"
                           height="30"
                           fetchPriority="high"
                           decoding="sync"
-                        />
-                      </a>
+                        /> */}
+                        <ApplicationLogo className="h-24"></ApplicationLogo>
+                      </NavLink>
                     </div>
                   </div>
                   <div className="col-xl-10 col-lg-10">
                     <div className="menu-wrapper  d-flex align-items-center justify-content-end">
                       <div className="main-menu d-none d-lg-block">
                         <nav>
-                          <ul id="navigation">
-                            <li>
-                              <a href="https://preview.colorlib.com/theme/consultingbiz/index.html">
-                                Home
-                              </a>
-                            </li>
-                            <li>
-                              <a href="https://preview.colorlib.com/theme/consultingbiz/about.html">
-                                About
-                              </a>
-                              <ul className="submenu">
-                                <li>
-                                  <a href="https://preview.colorlib.com/theme/consultingbiz/about.html">
-                                    About Us
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="https://preview.colorlib.com/theme/consultingbiz/testimonials.html">
-                                    Testimonials
-                                  </a>
-                                </li>
-                              </ul>
-                            </li>
-                            <li>
-                              <a href="https://preview.colorlib.com/theme/consultingbiz/services.html">
-                                Services
-                              </a>
-                              <ul className="submenu">
-                                <li>
-                                  <a href="https://preview.colorlib.com/theme/consultingbiz/services.html">
-                                    All Services
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="https://preview.colorlib.com/theme/consultingbiz/service_details.html">
-                                    Service Details
-                                  </a>
-                                </li>
-                              </ul>
-                            </li>
-                            <li>
-                              <a href="https://preview.colorlib.com/theme/consultingbiz/portfolio.html">
-                                Portfolio
-                              </a>
-                            </li>
-                            <li>
-                              <a href="https://preview.colorlib.com/theme/consultingbiz/blog.html">
-                                Blog
-                              </a>
-                              <ul className="submenu">
-                                <li>
-                                  <a href="https://preview.colorlib.com/theme/consultingbiz/blog.html">
-                                    Blog
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="https://preview.colorlib.com/theme/consultingbiz/blog_details.html">
-                                    Blog Details
-                                  </a>
-                                </li>
-                              </ul>
-                            </li>
-                            <li>
-                              <a href="https://preview.colorlib.com/theme/consultingbiz/contact.html">
-                                Contact
-                              </a>
-                              <ul className="submenu">
-                                <li>
-                                  <a href="https://preview.colorlib.com/theme/consultingbiz/contact.html">
-                                    Contact
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="https://preview.colorlib.com/theme/consultingbiz/careers.html">
-                                    Careers
-                                  </a>
-                                </li>
-                              </ul>
-                            </li>
-                          </ul>
+                          <ul id="navigation">{menuLinks}</ul>
                         </nav>
                       </div>
                     </div>

@@ -17,6 +17,20 @@ const AdminSidebar = () => {
       icon: MdDashboard,
     },
     {
+      title: "Menu Manage",
+      icon: MdSettings,
+      children: [
+        {
+          title: "Menu List",
+          path: "/admin/menu",
+        },
+        {
+          title: "Sub Menu List",
+          path: "/admin/sub-menu",
+        },
+      ],
+    },
+    {
       title: "Home",
       icon: MdSettings,
       children: [
@@ -75,7 +89,9 @@ const AdminSidebar = () => {
             <li key={index}>
               <NavLink
                 to={menu.path}
-                className={`${navClass} is-drawer-close:tooltip is-drawer-close:tooltip-right`}
+                className={({ isActive }) =>
+                  `${navClass({ isActive })} is-drawer-close:tooltip is-drawer-close:tooltip-right`
+                }
               >
                 <Icon size={20} />
                 <span className="is-drawer-close:hidden">{menu.title}</span>
@@ -104,7 +120,12 @@ const AdminSidebar = () => {
               <ul className="is-drawer-close:hidden">
                 {menu.children.map((child, i) => (
                   <li key={i}>
-                    <NavLink to={child.path} className={`ms-2 ${navClass}`}>
+                    <NavLink
+                      to={child.path}
+                      className={({ isActive }) =>
+                        `ms-2 ${navClass({ isActive })}`
+                      }
+                    >
                       {child.title}
                     </NavLink>
                   </li>

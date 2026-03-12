@@ -1,36 +1,46 @@
 "use strict";
+
+const { CommonStatus } = require("../constants/enums/CommonStatus.enum");
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("blogs", {
+    await queryInterface.createTable("menus", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      category_id: {
+      parent_id: {
         type: Sequelize.INTEGER,
-        allowNull: true,
         references: {
-          model: "Categories",
-          key: "id",
+          model: "menus", // table name
+          key: "id", // column name
         },
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
       },
-      title: {
+      banner_image: {
+        type: Sequelize.STRING,
+      },
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
       slug: {
         type: Sequelize.STRING,
-        unique: true,
         allowNull: false,
+        unique: true,
       },
-      image: Sequelize.STRING,
-      short_description: Sequelize.TEXT,
-      description: Sequelize.TEXT("long"),
+      serial: {
+        type: Sequelize.INTEGER,
+      },
+      status: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: CommonStatus.Active,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -42,6 +52,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("blogs");
+    await queryInterface.dropTable("menus");
   },
 };

@@ -56,7 +56,7 @@ module.exports.update = async (req, res, next) => {
     sendSuccess(res, "Updated successfully");
   } catch (error) {
     console.log(error);
-    next();
+    next(error);
     sendError(res, "Can't Update data!!", error);
   }
 };

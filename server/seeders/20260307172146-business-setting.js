@@ -22,11 +22,11 @@ module.exports = {
     }));
 
     // insert into database
-    await queryInterface.bulkInsert("business-settings", seedData, {});
+    await queryInterface.bulkInsert("business_settings", seedData, {});
   },
 
   async down(queryInterface, Sequelize) {
     // clear all business settings
-    await queryInterface.bulkDelete("business-settings", null, {});
+    await queryInterface.bulkDelete("business_settings", null, {});
   },
 };

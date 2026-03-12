@@ -26,7 +26,7 @@ const checkLogin = async (req, res, next) => {
         });
       }
       req.user = decoded; // user role email = decoded
-      next();
+      next(error);
     });
   } catch (error) {
     next("Authentication Failure!");
