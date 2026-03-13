@@ -6,9 +6,7 @@ import { imageUrl } from "../../../../utility/imageUrl";
 import { Link } from "react-router-dom";
 
 export default function HeroSection() {
-  const { data: heroSlides, loading } = useApiHook("/admin/slider");
-
-  console.log(heroSlides, loading);
+  const { data: heroSlides } = useApiHook("/admin/slider");
   return (
     <>
       <div className="slider-area">
@@ -16,7 +14,7 @@ export default function HeroSection() {
           modules={[Autoplay, Navigation]}
           slidesPerView={1}
           loop
-          autoplay={{ delay: 4000 }}
+          autoplay={{ delay: 2000 }}
           navigation={{
             nextEl: ".hero-next",
             prevEl: ".hero-prev",
