@@ -17505,11 +17505,13 @@ del {
 
 .swiper-button-prev,
 .swiper-button-next {
-  width: 60px !important;
-  height: 60px !important;
-  background: rgba(255, 255, 255, 0.9);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.4);
   border-radius: 50%;
-  color: #14435c;
+  top: 50%;
+  transform: translateY(-50%);
   transition: all 0.3s ease;
 }
 .swiper-button-prev::after,
@@ -19681,3 +19683,51 @@ textarea:focus-visible,
 }
 
 /*# sourceMappingURL=style.css.map */
+
+/* Custom CSS Start */
+.slider-area {
+  position: relative;
+}
+.single-slider {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+
+.slider-height {
+  min-height: 850px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  padding: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.swiper-button-next {
+  right: 20px;
+}
+
+.swiper-button-prev {
+  left: 20px;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: #ff5c00;
+}
+
+@media (max-width: 991px) {
+  .slider-height {
+    min-height: 650px;
+  }
+}
+
+@media (max-width: 576px) {
+  .slider-height {
+    min-height: 500px;
+  }
+}
+/* Custom CSS End */

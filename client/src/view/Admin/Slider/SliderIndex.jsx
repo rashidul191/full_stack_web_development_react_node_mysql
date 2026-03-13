@@ -25,6 +25,14 @@ export default function SliderIndex() {
       selector: (row) => row.sub_title,
     },
     {
+      name: "Button Text",
+      selector: (row) => row.button_text,
+    },
+    {
+      name: "Page Link",
+      selector: (row) => row.button_link,
+    },
+    {
       name: "Action",
       center: true,
       cell: (row) => (

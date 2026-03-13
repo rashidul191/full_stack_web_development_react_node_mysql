@@ -19,6 +19,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+
+      button_text: DataTypes.STRING,
+      button_link: DataTypes.STRING,
       content: DataTypes.TEXT,
     },
     {

@@ -1,4 +1,10 @@
 import React from "react";
+
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 import { Outlet } from "react-router-dom";
 import Navbar from "../FrontEnd/Common/Navbar";
 import Footer from "../FrontEnd/Common/Footer";
@@ -11,14 +17,21 @@ const FrontendLayout = () => {
     "/themify-icons.css",
     "/animate.min.css",
     "/style.css",
-    "/swiper-bundle.min.css",
+    // "/swiper-bundle.min.css",
+    "/glightbox.min.css",
+    "/aos.css",
   ];
   for (const value of cssAssets) {
     useCss(`front-end/assets/css${value}`);
   }
 
-  let jsAssets = ["/swiper-bundle.min.js", "/main.js"];
-
+  let jsAssets = [
+    "/bootstrap.bundle.min.js",
+    // "/swiper-bundle.min.js",
+    "/glightbox.min.js",
+    "/aos.js",
+    // "/main.js",
+  ];
   for (const value of jsAssets) {
     useScript(`front-end/assets/js${value}`);
   }

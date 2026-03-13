@@ -91,14 +91,27 @@ export default function SliderForm() {
             </div>
 
             <LabeledInput
-              name="title"
-              required={true}
+              name="title"          
               register={register}
               errors={errors}
               className="w-full md:w-1/2 p-1"
             />
             <LabeledInput
               name="sub_title"
+              register={register}
+              errors={errors}
+              className="w-full md:w-1/2 p-1"
+            />
+
+            <LabeledInput
+              name="button_text"
+              register={register}
+              errors={errors}
+              className="w-full md:w-1/2 p-1"
+            />
+            <LabeledInput
+              label="Page Link"
+              name="button_link"
               register={register}
               errors={errors}
               className="w-full md:w-1/2 p-1"

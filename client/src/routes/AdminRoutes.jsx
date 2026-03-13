@@ -29,8 +29,8 @@ export const AdminRoutes = (
     <Route
       path="/admin"
       element={
-        // <PrivateRoute role={ROLES.ADMIN}>
-        <AdminLayout />
+        // <PrivateRoute role={ROLES.Admin}>
+          <AdminLayout />
         // </PrivateRoute>
       }
     >

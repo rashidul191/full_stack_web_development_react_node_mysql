@@ -13,8 +13,6 @@ const Navbar = () => {
     ?.filter((item) => item.parent_id === null);
   // const { auth, logoutUser } = userInfo;
 
-  console.log(menus);
-
   const menuLinks = (
     <>
       <li>
@@ -24,11 +22,11 @@ const Navbar = () => {
       {topMenus
         ?.sort((a, b) => a.serial - b.serial)
         ?.map((item) => (
-          <li>
+          <li key={item?.id}>
             <NavLink to={item?.slug}>{item?.name}</NavLink>
             {item?.children?.length > 0 ? (
               <ul className="submenu">
-                <li>
+                <li key={item?.id}>
                   {item?.children
                     ?.sort((x, y) => x.serial - y.serial)
                     ?.map((subMenu) => (

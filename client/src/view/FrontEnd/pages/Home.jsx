@@ -1,85 +1,14 @@
 import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import HeroSection from "./HomePageSection/HeroSection";
+
 
 const Home = () => {
   return (
     <>
       <main>
-        <div className="slider-area ">
-          <div className="slider-active">
-            <div
-              className="single-slider slider-height d-flex align-items-center"
-              data-background="/assets/img/hero/h1_hero.webp"
-            >
-              <div className="container">
-                <div className="row">
-                  <div className="col-xl-8 col-lg-7 col-md-8">
-                    <div className="hero__caption">
-                      <span data-animation="fadeInLeft" data-delay=".1s">
-                        Committed to success
-                      </span>
-                      <h1 data-animation="fadeInLeft" data-delay=".5s">
-                        We help to grow your business
-                      </h1>
-                      <p data-animation="fadeInLeft" data-delay=".9s">
-                        Mollit anim laborum.Dvcuis aute serunt iruxvfg dhjkolohr
-                        indd re voluptate
-                        <br /> velit esscillumlore eu quife nrulla parihatur.
-                      </p>
-
-                      <div
-                        className="hero__btn"
-                        data-animation="fadeInLeft"
-                        data-delay="1.1s"
-                      >
-                        <a
-                          href="https://preview.colorlib.com/theme/consultingbiz/industries.html"
-                          className="btn hero-btn"
-                        >
-                          Our Services
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="single-slider slider-height d-flex align-items-center">
-              <div className="container">
-                <div className="row">
-                  <div className="col-xl-8 col-lg-7 col-md-8">
-                    <div className="hero__caption">
-                      <span data-animation="fadeInLeft" data-delay=".1s">
-                        Committed to success
-                      </span>
-                      <h1 data-animation="fadeInLeft" data-delay=".5s">
-                        We help to grow your business
-                      </h1>
-                      <p data-animation="fadeInLeft" data-delay=".9s">
-                        Mollit anim laborum.Dvcuis aute serunt iruxvfg dhjkolohr
-                        indd re voluptate
-                        <br /> velit esscillumlore eu quife nrulla parihatur.
-                      </p>
-
-                      <div
-                        className="hero__btn"
-                        data-animation="fadeInLeft"
-                        data-delay="1.1s"
-                      >
-                        <a
-                          href="https://preview.colorlib.com/theme/consultingbiz/industries.html"
-                          className="btn hero-btn"
-                        >
-                          Our Services
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <HeroSection></HeroSection>
 
         <div className="categories-area section-padding30">
           <div className="container">
@@ -1218,66 +1147,69 @@ const Home = () => {
         <div className="brand-area pb-140">
           <div className="container">
             <div className="brand-active brand-border pb-40">
-              <div className="single-brand">
-                <img
-                  src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/brand1.webp"
-                  alt="Partner brand"
-                  width="166"
-                  height="41"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div className="single-brand">
-                <img
-                  src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/brand2.webp"
-                  alt="Partner brand"
-                  width="175"
-                  height="50"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div className="single-brand">
-                <img
-                  src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/brand3.webp"
-                  alt="Partner brand"
-                  width="156"
-                  height="59"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div className="single-brand">
-                <img
-                  src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/brand4.webp"
-                  alt="Partner brand"
-                  width="170"
-                  height="46"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div className="single-brand">
-                <img
-                  src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/brand2.webp"
-                  alt="Partner brand"
-                  width="175"
-                  height="50"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div className="single-brand">
-                <img
-                  src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/brand5.webp"
-                  alt="Partner brand"
-                  width="168"
-                  height="48"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
+              <Swiper
+                modules={[Autoplay]}
+                spaceBetween={30}
+                loop={true}
+                autoplay={{ delay: 2000 }}
+                breakpoints={{
+                  320: { slidesPerView: 2 },
+                  576: { slidesPerView: 3 },
+                  768: { slidesPerView: 4 },
+                  1024: { slidesPerView: 5 },
+                }}
+              >
+                <SwiperSlide>
+                  <img
+                    src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/brand1.webp"
+                    alt="Partner brand"
+                    width="166"
+                    height="41"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img
+                    src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/brand2.webp"
+                    alt="Partner brand"
+                    width="166"
+                    height="41"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img
+                    src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/brand3.webp"
+                    alt="Partner brand"
+                    width="166"
+                    height="41"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img
+                    src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/brand4.webp"
+                    alt="Partner brand"
+                    width="166"
+                    height="41"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img
+                    src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/brand5.webp"
+                    alt="Partner brand"
+                    width="166"
+                    height="41"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </SwiperSlide>
+              </Swiper>
             </div>
           </div>
         </div>
