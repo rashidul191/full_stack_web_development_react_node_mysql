@@ -9,6 +9,7 @@ import { useApiHook, useImagePreview } from "../../../hook/customHook";
 import Loading from "../../layouts/Shared/Loading";
 import { useNavigate, useParams } from "react-router-dom";
 import { imageUrl } from "../../../utility/imageUrl";
+import RichTextEditor from "../../Components/RichTextEditor";
 
 export default function BlogForm() {
   const { previewImage, handleImageChange } = useImagePreview();
@@ -25,6 +26,7 @@ export default function BlogForm() {
   const { data: blog, loading } = useApiHook(id ? `/admin/blog/${id}` : null); // custom hook
 
   const {
+    control,
     register,
     reset,
     formState: { errors },
@@ -76,17 +78,22 @@ export default function BlogForm() {
       <div className="shadow-lg p-4 rounded mt-5">
         <form onSubmit={handleSubmit(onSubmit)} className="">
           <div className="w-full flex flex-wrap">
-            <div className="w-full md:w-3/5 p-2">
+            <div className="w-full md:w-2/3 p-2">
               <LabeledInput
                 name="title"
                 required={true}
                 register={register}
                 errors={errors}
               />
-
-              <LabeledTextarea name="description" register={register} />
+              {/* <LabeledTextarea name="description" register={register} /> */}
+              <RichTextEditor
+                label="Description"
+                name="description"
+                control={control}
+                errors={errors}
+              ></RichTextEditor>
             </div>
-            <div className="w-full md:w-2/5 p-2">
+            <div className="w-full md:w-1/3 p-2">
               <div>
                 <img
                   className="w-14 h-14 mb-2 object-cover rounded"

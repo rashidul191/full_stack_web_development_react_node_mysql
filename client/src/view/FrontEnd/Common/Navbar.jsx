@@ -43,6 +43,9 @@ const Navbar = () => {
         ))}
 
       <li>
+        <NavLink to="/blog">Blog</NavLink>
+      </li>
+      <li>
         <a href="https://preview.colorlib.com/theme/consultingbiz/contact.html">
           Contact
         </a>

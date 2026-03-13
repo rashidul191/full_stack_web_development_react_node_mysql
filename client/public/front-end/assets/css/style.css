@@ -12981,24 +12981,33 @@ hero-btn {
 }
 
 .section-padding30 {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+/* .section-padding30 {
   padding-top: 195px;
   padding-bottom: 170px;
-}
+} */
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
-  .section-padding30 {
+  /* .section-padding30 {
     padding-top: 195px;
     padding-bottom: 170px;
+  } */
+
+  .section-padding30 {
+    padding-top: 100px;
+    padding-bottom: 100px;
   }
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .section-padding30 {
-    padding-top: 150px;
-    padding-bottom: 110px;
+    padding-top: 80px;
+    padding-bottom: 80px;
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .section-padding30 {
-    padding-top: 100px;
+    padding-top: 70px;
     padding-bottom: 70px;
   }
 }

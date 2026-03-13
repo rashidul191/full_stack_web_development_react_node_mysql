@@ -3,8 +3,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import HeroSection from "./HomePageSection/HeroSection";
 import ClientReviewSection from "./HomePageSection/ClientReviewSection";
+import { useApiHook } from "../../../hook/customHook";
+import Blog from "./BlogPageSection/Blog";
 
 const Home = () => {
+  const { data: blogs } = useApiHook("/blog");
   return (
     <>
       <main>
@@ -24,8 +27,8 @@ const Home = () => {
               <div className="col-lg-4 col-md-6 col-sm-6">
                 <div
                   className="single-cat text-center mb-50"
-                  data-aos="fade-up"
-                  data-aos-delay="100"
+                  // data-aos="fade-up"
+                  // data-aos-delay="100"
                 >
                   <div className="cat-icon">
                     <span className="flaticon-development"></span>
@@ -46,8 +49,8 @@ const Home = () => {
               <div className="col-lg-4 col-md-6 col-sm-6">
                 <div
                   className="single-cat text-center mb-50"
-                  data-aos="fade-up"
-                  data-aos-delay="200"
+                  // data-aos="fade-up"
+                  // data-aos-delay="200"
                 >
                   <div className="cat-icon">
                     <span className="flaticon-result"></span>
@@ -68,8 +71,8 @@ const Home = () => {
               <div className="col-lg-4 col-md-6 col-sm-6">
                 <div
                   className="single-cat text-center mb-50"
-                  data-aos="fade-up"
-                  data-aos-delay="300"
+                  // data-aos="fade-up"
+                  // data-aos-delay="300"
                 >
                   <div className="cat-icon">
                     <span className="flaticon-team"></span>
@@ -93,7 +96,10 @@ const Home = () => {
 
         <div
           className="support-company-area pt-100 pb-100 section-bg fix"
-          data-background="assets/img/gallery/section_bg02.webp"
+          style={{
+            backgroundImage:
+              "url('https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/section_bg02.webp')",
+          }}
         >
           <div className="container">
             <div className="row align-items-center">
@@ -146,8 +152,8 @@ const Home = () => {
               <div className="col-lg-6">
                 <div
                   className="video-wrapper"
-                  data-aos="fade-right"
-                  data-aos-delay="100"
+                  // data-aos="fade-right"
+                  // data-aos-delay="100"
                 >
                   <div className="video-thumbnail">
                     <img
@@ -172,8 +178,8 @@ const Home = () => {
               <div className="col-lg-6">
                 <div
                   className="video-content"
-                  data-aos="fade-left"
-                  data-aos-delay="200"
+                  // data-aos="fade-left"
+                  // data-aos-delay="200"
                 >
                   <h2>See How We Transform Businesses</h2>
                   <p>
@@ -217,8 +223,8 @@ const Home = () => {
               <div className="col-lg-6 col-md-6 col-sm-10">
                 <div
                   className="single-services mb-100"
-                  data-aos="fade-up"
-                  data-aos-delay="100"
+                  // data-aos="fade-up"
+                  // data-aos-delay="100"
                 >
                   <div className="services-img">
                     <img
@@ -243,8 +249,8 @@ const Home = () => {
               <div className="col-lg-6 col-md-6 col-sm-10">
                 <div
                   className="single-services mb-100"
-                  data-aos="fade-up"
-                  data-aos-delay="200"
+                  // data-aos="fade-up"
+                  // data-aos-delay="200"
                 >
                   <div className="services-img">
                     <img
@@ -269,8 +275,8 @@ const Home = () => {
               <div className="col-lg-6 col-md-6 col-sm-10">
                 <div
                   className="single-services mb-100"
-                  data-aos="fade-up"
-                  data-aos-delay="100"
+                  // data-aos="fade-up"
+                  // data-aos-delay="100"
                 >
                   <div className="services-img">
                     <img
@@ -295,8 +301,8 @@ const Home = () => {
               <div className="col-lg-6 col-md-6 col-sm-10">
                 <div
                   className="single-services mb-100"
-                  data-aos="fade-up"
-                  data-aos-delay="200"
+                  // data-aos="fade-up"
+                  // data-aos-delay="200"
                 >
                   <div className="services-img">
                     <img
@@ -336,8 +342,8 @@ const Home = () => {
               <div className="col-lg-4 col-md-6">
                 <div
                   className="case-study-card"
-                  data-aos="fade-up"
-                  data-aos-delay="100"
+                  // data-aos="fade-up"
+                  // data-aos-delay="100"
                 >
                   <div className="case-study-img">
                     <img
@@ -370,8 +376,8 @@ const Home = () => {
               <div className="col-lg-4 col-md-6">
                 <div
                   className="case-study-card"
-                  data-aos="fade-up"
-                  data-aos-delay="200"
+                  // data-aos="fade-up"
+                  // data-aos-delay="200"
                 >
                   <div className="case-study-img">
                     <img
@@ -404,8 +410,8 @@ const Home = () => {
               <div className="col-lg-4 col-md-6">
                 <div
                   className="case-study-card"
-                  data-aos="fade-up"
-                  data-aos-delay="300"
+                  // data-aos="fade-up"
+                  // data-aos-delay="300"
                 >
                   <div className="case-study-img">
                     <img
@@ -514,8 +520,8 @@ const Home = () => {
               <div className="col-xl-4 col-lg-4 col-md-6 col-sm-">
                 <div
                   className="single-team mb-30"
-                  data-aos="fade-up"
-                  data-aos-delay="100"
+                  // data-aos="fade-up"
+                  // data-aos-delay="100"
                 >
                   <div className="team-img">
                     <img
@@ -538,8 +544,8 @@ const Home = () => {
               <div className="col-xl-4 col-lg-4 col-md-6 col-sm-">
                 <div
                   className="single-team mb-30"
-                  data-aos="fade-up"
-                  data-aos-delay="200"
+                  // data-aos="fade-up"
+                  // data-aos-delay="200"
                 >
                   <div className="team-img">
                     <img
@@ -562,8 +568,8 @@ const Home = () => {
               <div className="col-xl-4 col-lg-4 col-md-6 col-sm-">
                 <div
                   className="single-team mb-30"
-                  data-aos="fade-up"
-                  data-aos-delay="300"
+                  // data-aos="fade-up"
+                  // data-aos-delay="300"
                 >
                   <div className="team-img">
                     <img
@@ -589,7 +595,10 @@ const Home = () => {
 
         <div
           className="pricing-area section-bg"
-          data-background="assets/img/gallery/section_bg02.webp"
+          style={{
+            backgroundImage:
+              "url('https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/section_bg02.webp')",
+          }}
         >
           <div className="container">
             <div className="row">
@@ -616,8 +625,8 @@ const Home = () => {
               <div className="col-lg-4 col-md-6">
                 <div
                   className="pricing-card"
-                  data-aos="fade-up"
-                  data-aos-delay="100"
+                  // data-aos="fade-up"
+                  // data-aos-delay="100"
                 >
                   <div className="pricing-header">
                     <div className="pricing-icon">
@@ -629,8 +638,8 @@ const Home = () => {
                   <div className="pricing-price">
                     <span
                       className="price"
-                      data-monthly="499"
-                      data-yearly="399"
+                      // data-monthly="499"
+                      // data-yearly="399"
                     >
                       <sup>$</sup>
                       <span className="amount">499</span>
@@ -658,8 +667,8 @@ const Home = () => {
               <div className="col-lg-4 col-md-6">
                 <div
                   className="pricing-card featured"
-                  data-aos="fade-up"
-                  data-aos-delay="200"
+                  // data-aos="fade-up"
+                  // data-aos-delay="200"
                 >
                   <span className="popular-badge">Most Popular</span>
                   <div className="pricing-header">
@@ -701,8 +710,8 @@ const Home = () => {
               <div className="col-lg-4 col-md-6">
                 <div
                   className="pricing-card"
-                  data-aos="fade-up"
-                  data-aos-delay="300"
+                  // data-aos="fade-up"
+                  // data-aos-delay="300"
                 >
                   <div className="pricing-header">
                     <div className="pricing-icon">
@@ -760,8 +769,8 @@ const Home = () => {
                   <div className="accordion" id="faqAccordion">
                     <div
                       className="accordion-item"
-                      data-aos="fade-up"
-                      data-aos-delay="100"
+                      // data-aos="fade-up"
+                      // data-aos-delay="100"
                     >
                       <h2 className="accordion-header">
                         <button
@@ -793,8 +802,8 @@ const Home = () => {
                     </div>
                     <div
                       className="accordion-item"
-                      data-aos="fade-up"
-                      data-aos-delay="150"
+                      // data-aos="fade-up"
+                      // data-aos-delay="150"
                     >
                       <h2 className="accordion-header">
                         <button
@@ -825,8 +834,8 @@ const Home = () => {
                     </div>
                     <div
                       className="accordion-item"
-                      data-aos="fade-up"
-                      data-aos-delay="200"
+                      // data-aos="fade-up"
+                      // data-aos-delay="200"
                     >
                       <h2 className="accordion-header">
                         <button
@@ -858,8 +867,8 @@ const Home = () => {
                     </div>
                     <div
                       className="accordion-item"
-                      data-aos="fade-up"
-                      data-aos-delay="250"
+                      // data-aos="fade-up"
+                      // data-aos-delay="250"
                     >
                       <h2 className="accordion-header">
                         <button
@@ -890,8 +899,8 @@ const Home = () => {
                     </div>
                     <div
                       className="accordion-item"
-                      data-aos="fade-up"
-                      data-aos-delay="300"
+                      // data-aos="fade-up"
+                      // data-aos-delay="300"
                     >
                       <h2 className="accordion-header">
                         <button
@@ -927,7 +936,7 @@ const Home = () => {
           </div>
         </div>
 
-        <section
+        {/* <section
           className="wantToWork-area w-padding2 section-bg"
           data-background="assets/img/gallery/section_bg03.webp"
         >
@@ -948,7 +957,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <div className="home-blog-area section-padding30">
           <div className="container">
@@ -960,89 +969,14 @@ const Home = () => {
                 </div>
               </div>
             </div>
+
             <div className="row">
-              <div className="col-xl-6 col-lg-6 col-md-6">
-                <div
-                  className="home-blog-single mb-30"
-                  data-aos="fade-up"
-                  data-aos-delay="100"
-                >
-                  <div className="blog-img-cap">
-                    <div className="blog-img">
-                      <img
-                        src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/home_blog1.webp"
-                        alt="Blog post image"
-                        width="555"
-                        height="420"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <ul>
-                        <li>By Admin - October 27, 2032</li>
-                      </ul>
-                    </div>
-                    <div className="blog-cap">
-                      <h3>
-                        <a href="https://preview.colorlib.com/theme/consultingbiz/blog_details.html">
-                          16 Easy Ideas to Use in Everyday
-                        </a>
-                      </h3>
-                      <p>
-                        Amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magnua Quis ipsum
-                        suspendisse ultrices gra.
-                      </p>
-                      <a
-                        href="https://preview.colorlib.com/theme/consultingbiz/blog_details.html"
-                        className="more-btn"
-                      >
-                        Read more
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-6 col-lg-6 col-md-6">
-                <div
-                  className="home-blog-single mb-30"
-                  data-aos="fade-up"
-                  data-aos-delay="200"
-                >
-                  <div className="blog-img-cap">
-                    <div className="blog-img">
-                      <img
-                        src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/home_blog2.webp"
-                        alt="Blog post image"
-                        width="555"
-                        height="420"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <ul>
-                        <li>By Admin - October 27, 2032</li>
-                      </ul>
-                    </div>
-                    <div className="blog-cap">
-                      <h3>
-                        <a href="https://preview.colorlib.com/theme/consultingbiz/blog_details.html">
-                          16 Easy Ideas to Use in Everyday
-                        </a>
-                      </h3>
-                      <p>
-                        Amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magnua Quis ipsum
-                        suspendisse ultrices gra.
-                      </p>
-                      <a
-                        href="https://preview.colorlib.com/theme/consultingbiz/blog_details.html"
-                        className="more-btn"
-                      >
-                        Read more
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {blogs?.data
+                ?.sort((a, b) => b?.id - a?.id)
+                ?.slice(0, 2)
+                ?.map((blog, index) => (
+                  <Blog key={index} blog={blog}></Blog>
+                ))}
             </div>
           </div>
         </div>

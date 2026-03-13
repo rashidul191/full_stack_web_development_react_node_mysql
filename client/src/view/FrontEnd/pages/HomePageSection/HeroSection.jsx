@@ -20,8 +20,8 @@ export default function HeroSection() {
             prevEl: ".hero-prev",
           }}
         >
-          {heroSlides?.map((item, index) => (
-            <SwiperSlide key={index}>
+          {heroSlides?.map((item) => (
+            <SwiperSlide key={item?.id}>
               <div
                 className="single-slider slider-height d-flex align-items-center"
                 style={{ backgroundImage: `url(${imageUrl(item?.image)})` }}

@@ -5,17 +5,12 @@ const { sendSuccess, sendError } = require("../../utility/response.handle.js");
 const { indexService, showService } = require("../../utility/curd.service.js");
 module.exports.index = async (req, res) => {
   try {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 12;
-
-    const data = await indexService(Blog, {
-      page,
-      limit,
+    const data = await indexService(Category, {
       include: [
         {
-          model: Category,
-          attributes: ["id", "name"],
-          as: "category",
+          model: Blog,
+          attributes: ["id", "title"],
+          as: "blogs",
         },
       ],
     });
@@ -25,9 +20,9 @@ module.exports.index = async (req, res) => {
     sendError(res, "Can't find data in the database!!", error);
   }
 };
+
 module.exports.show = async (req, res) => {
   try {
-    // const data = await Blog.findByPk(req.params.id);
     const slug = req.params.slug;
     const data = await showService(Blog, slug, {
       include: [

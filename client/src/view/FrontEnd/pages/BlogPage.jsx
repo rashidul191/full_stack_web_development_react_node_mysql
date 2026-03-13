@@ -1,113 +1,40 @@
-import { React, useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useApiHook } from "../../../hook/customHook";
+import Loading from "../../layouts/Shared/Loading";
+import Blog from "./BlogPageSection/Blog";
+import Pagination from "../../Components/Pagination";
 
-import axios from "axios";
-import { URL } from "../../../config/app";
-import { useForm } from "react-hook-form";
+export default function BlogPage() {
+  const [page, setPage] = useState(1);
+  let limit = 12; // per page data view
 
-import LabeledInput from "../../Components/LabeledInput";
-import LabeledTextarea from "../../Components/LabeledTextarea";
-import SubmitBtn from "../../Components/SubmitBtn";
-import { useNavigate } from "react-router-dom";
+  const { data: blogs, loading } = useApiHook(
+    `/blog?page=${page}&limit=${limit}`,
+  );
 
-const BlogPage = () => {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
-  const onSubmit = (data) => {
-    const storeData = {
-      image: "image here...",
-      title: data.title,
-      content: data.content,
-    };
-    axios.post(`${URL}/blogs`, storeData).then((res) => {
-      if (res.data.statusCode === 200) {
-        window.location.reload();
-      } else {
-        alert(res.data.message);
-      }
-    });
-  };
-
-  const [blogs, setBlogs] = useState([]);
-
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    axios.get(`${URL}/blogs`).then((res) => {
-      // console.log(res.data.data);
-      setBlogs(res.data.data);
-    });
-  }, []);
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const data = {
-  //     image: "image here...",
-  //     title: e.target.title.value,
-  //     content: e.target.content.value,
-  //   };
-  //   axios.post(`${URL}/blogs`, data).then((res) => {
-  //     console.log(res.data);
-  //   });
-  // };
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
-    <>
-      {/* Create Blog Form */}
-      <div>
-        {/* <form onSubmit={handleSubmit}>
-          <input type="text" name="title" placeholder="Title" />
-          <textarea type="text" name="content" placeholder="Content" />
-          <button type="submit">Create</button>
-        </form> */}
+    <div className="home-blog-area section-padding30">
+      <div className="container">
+        {/* BLOG LIST */}
+        <div className="row">
+          {blogs?.data
+            ?.sort((a, b) => b?.id - a?.id)
+            ?.map((blog) => (
+              <Blog key={blog.id} blog={blog} />
+            ))}
+        </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="p-5">
-          <LabeledInput
-            className=""
-            name={"title"}
-            required={true}
-            register={register}
-            errors={errors}
-          />
-
-          <LabeledTextarea
-            className=""
-            name={"content"}
-            placeholder={"Content here..."}
-            register={register}
-            errors={errors}
-          />
-
-          <SubmitBtn className="" value={"Add Blog"} />
-        </form>
+        {/* PAGINATION */}
+        <Pagination
+          page={page}
+          totalPages={blogs?.pagination?.totalPages}
+          setPage={setPage}
+        />
       </div>
-      {/* Blog Show List */}
-      <div className="text-center">
-        {blogs.map((item) => (
-          <div key={item.id}>
-            <span>{item.id}</span>
-            <h1>{item.title}</h1>
-            <p>{item.content}</p>
-            <button
-              className="bg-gray-700 text-white px-4 py-2 rounded"
-              onClick={() => navigate(`/blog/${item.id}`)}
-            >
-              Details
-            </button>
-
-            {/* <button
-              className="bg-red-500 text-white px-4 py-2 rounded"
-              onClick={}
-            >
-              Delete
-            </button> */}
-          </div>
-        ))}
-      </div>
-    </>
+    </div>
   );
-};
-
-export default BlogPage;
+}

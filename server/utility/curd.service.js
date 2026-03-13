@@ -1,6 +1,34 @@
+const { Op } = require("sequelize");
+
 // get all data
-module.exports.indexService = async (model, option = {}) => {
-  return await model.findAll(option);
+// module.exports.indexService = async (model, option = {}) => {
+//   return await model.findAll(option);
+// };
+
+module.exports.indexService = async (model, options = {}) => {
+  const { page, limit, ...queryOptions } = options;
+
+  if (page && limit) {
+    const offset = (page - 1) * limit;
+
+    const { rows, count } = await model.findAndCountAll({
+      ...queryOptions,
+      limit,
+      offset,
+    });
+
+    return {
+      data: rows,
+      pagination: {
+        total: count,
+        page,
+        limit,
+        totalPages: Math.ceil(count / limit),
+      },
+    };
+  }
+
+  return await model.findAll(queryOptions);
 };
 
 // create data
@@ -9,8 +37,14 @@ module.exports.createService = async (model, data) => {
 };
 
 // get single by id
-module.exports.showService = async (model, id, options = {}) => {
-  return await model.findByPk(id, options);
+module.exports.showService = async (model, column, options = {}) => {
+  // return await model.findByPk(id, options);
+  return await model.findOne({
+    where: {
+      [Op.or]: [{ id: column }, { slug: column }],
+    },
+    ...options,
+  });
 };
 
 // update single by id

@@ -111,11 +111,10 @@ export default function ReviewForm() {
             /> */}
 
             <RichTextEditor
-              name="review_text"
               label="Review Text"
+              name="review_text"
               control={control}
-              errors={errors}
-              required
+              errors={errors}           
             />
           </div>
 

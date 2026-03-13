@@ -12,7 +12,7 @@ export const FrontendRoutes = (
     <Route element={<FrontendLayout />}>
       <Route path="/" element={<Home />} />
       <Route path="/blog" element={<BlogPage />} />
-      <Route path="/blog/:id" element={<BlogDetails />} />
+      <Route path="/blog/:slug" element={<BlogDetails />} />
       <Route path="/:slug" element={<TopMenuContent></TopMenuContent>} />
       <Route path="/:slug/:slug" element={<SubMenuContent></SubMenuContent>} />
     </Route>
