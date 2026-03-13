@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import ApplicationLogo from "../../Components/ApplicationLogo";
 import { useApiHook } from "../../../hook/customHook";
+import { CommonStatus } from "../../../enum/commonStatus";
 
 const Navbar = () => {
   // const userInfo = useContext(AuthContext);
@@ -10,7 +11,9 @@ const Navbar = () => {
   const { data: menus } = useApiHook("/admin/menu");
   const topMenus = menus
     ?.sort((a, b) => a.serial - b.serial)
-    ?.filter((item) => item.parent_id === null);
+    ?.filter(
+      (item) => item.parent_id === null && item?.status === CommonStatus.Active,
+    );
   // const { auth, logoutUser } = userInfo;
 
   const menuLinks = (
@@ -19,28 +22,26 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
 
-      {topMenus
-        ?.sort((a, b) => a.serial - b.serial)
-        ?.map((item) => (
-          <li key={item?.id}>
-            <NavLink to={item?.slug}>{item?.name}</NavLink>
-            {item?.children?.length > 0 ? (
-              <ul className="submenu">
-                <li key={item?.id}>
-                  {item?.children
-                    ?.sort((x, y) => x.serial - y.serial)
-                    ?.map((subMenu) => (
-                      <NavLink to={`${item.slug}/${subMenu.slug}`}>
-                        {subMenu?.name}
-                      </NavLink>
-                    ))}
-                </li>
-              </ul>
-            ) : (
-              ""
-            )}
-          </li>
-        ))}
+      {topMenus?.map((item) => (
+        <li key={item?.id}>
+          <NavLink to={item?.slug}>{item?.name}</NavLink>
+          {item?.children?.length > 0 ? (
+            <ul className="submenu">
+              <li key={item?.id}>
+                {item?.children
+                  ?.sort((x, y) => x.serial - y.serial)
+                  ?.map((subMenu) => (
+                    <NavLink to={`${item.slug}/${subMenu.slug}`}>
+                      {subMenu?.name}
+                    </NavLink>
+                  ))}
+              </li>
+            </ul>
+          ) : (
+            ""
+          )}
+        </li>
+      ))}
 
       <li>
         <NavLink to="/blog">Blog</NavLink>

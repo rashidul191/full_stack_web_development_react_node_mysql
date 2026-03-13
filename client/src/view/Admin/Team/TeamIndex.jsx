@@ -7,36 +7,33 @@ import { useApiHook } from "../../../hook/customHook";
 import Loading from "../../layouts/Shared/Loading";
 import { getCommonStatusName } from "../../../enum/commonStatus";
 
-export default function MenuIndex() {
-  const { data: menus, loading, deleteData } = useApiHook("/admin/menu");
-  const topMenus = menus
-    ?.sort((a, b) => a.serial - b.serial)
-    ?.filter((item) => item.parent_id === null);
+export default function TeamIndex() {
+  const { data: teams, loading, deleteData } = useApiHook("/admin/team");
   const columns = [
     {
-      name: "Page Banner Image",
-
+      name: "Image",
       cell: (row) => (
-        <img className="w-10 h-10" src={imageUrl(row.banner_image)} alt="" />
+        <img className="w-10 h-10" src={imageUrl(row.image)} alt="" />
       ),
     },
     {
-      name: "Menu Name",
+      name: "Name",
       selector: (row) => row.name,
       sortable: true,
     },
     {
-      name: "Slug",
-      selector: (row) => row.slug,
+      name: "Designation",
+      selector: (row) => row.designation ?? "--",
     },
     {
       name: "Serial",
-      selector: (row) => row.serial,
+      selector: (row) => row.serial ?? "--",
     },
     {
       name: "Status",
       selector: (row) => getCommonStatusName[row.status],
     },
+
     {
       name: "Action",
       center: true,
@@ -63,13 +60,16 @@ export default function MenuIndex() {
   }
   return (
     <>
-      <HeaderSection title={"Menu List"} createLink={"create"}></HeaderSection>
+      <HeaderSection
+        title={"Review List"}
+        createLink={"/admin/team/create"}
+      ></HeaderSection>
 
       <div className="shadow">
         <TableData
           columns={columns}
-          data={topMenus || []}
-          searchKeys={["title", "sub_title"]}
+          data={teams?.sort((a, b) => a.serial - b.serial) || []}
+          searchKeys={["name", "slug", "serial"]}
         />
       </div>
     </>

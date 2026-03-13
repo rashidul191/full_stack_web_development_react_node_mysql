@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import HeaderSection from "../../Components/HeaderSection";
 import { AuthContext } from "../../../context/AuthContext";
 import LabeledInput from "../../Components/LabeledInput";
 import SubmitBtn from "../../Components/SubmitBtn";
-import LabeledTextarea from "../../Components/LabeledTextarea";
 import { useApiHook, useImagePreview } from "../../../hook/customHook";
 import Loading from "../../layouts/Shared/Loading";
 import { useNavigate, useParams } from "react-router-dom";
 import { imageUrl } from "../../../utility/imageUrl";
-import LabeledSelected from "../../Components/LabeledSelected";
+import RichTextEditor from "../../Components/RichTextEditor";
 import { CommonStatus } from "../../../enum/commonStatus";
+import LabeledSelected from "../../Components/LabeledSelected";
 import slugify from "slugify";
 
-export default function MenuForm() {
+export default function TeamForm() {
   const { previewImage, handleImageChange } = useImagePreview();
 
   const navigator = useNavigate();
@@ -21,12 +21,13 @@ export default function MenuForm() {
   const { id } = useParams();
 
   // CRUD
-  const { createData, updateData } = useApiHook("/admin/menu"); // custom hook
+  const { createData, updateData } = useApiHook("/admin/team"); // custom hook
 
   // Single data (edit)
-  const { data: menu, loading } = useApiHook(id ? `/admin/menu/${id}` : null); // custom hook
+  const { data: team, loading } = useApiHook(id ? `/admin/team/${id}` : null); // custom hook
 
   const {
+    control,
     register,
     reset,
     formState: { errors },
@@ -37,19 +38,19 @@ export default function MenuForm() {
   // Load single data in form
   // ==========================
   useEffect(() => {
-    if (menu) {
-      reset(menu);
+    if (team) {
+      reset(team);
     }
-  }, [menu, reset]);
+  }, [team, reset]);
 
   // ==========================
   // Submit
   // ==========================
   const onSubmit = async (data) => {
-      data.slug = slugify(data?.name, {
-          lower: true,
-          strict: true,
-        });
+    data.slug = slugify(data?.name, {
+      lower: true,
+      strict: true,
+    });
     let res;
     if (id) {
       res = await updateData(id, data, true); // true for image
@@ -58,7 +59,7 @@ export default function MenuForm() {
     }
 
     if (res) {
-      navigator("/admin/menu");
+      navigator("/admin/team");
     }
   };
 
@@ -71,43 +72,48 @@ export default function MenuForm() {
   return (
     <>
       <HeaderSection
-        title={`Menu ${id ? "Edit" : "Create"}`}
-        backLink={"/admin/menu"}
+        title={`Team ${id ? "Edit" : "Create"}`}
+        backLink={"/admin/team"}
       ></HeaderSection>
 
       <div className="shadow-lg p-4 rounded mt-5">
         <form onSubmit={handleSubmit(onSubmit)} className="">
-          <div className="w-full flex flex-wrap">
-            <div className="w-full p-1">
+          <div className="w-full flex flex-wrap items-end">
+            <div className="w-full md:w-1/2 p-1">
               <img
                 className="w-14 h-14 mb-2 object-cover rounded"
-                src={previewImage?.image || imageUrl(menu?.image)}
+                src={previewImage?.image || imageUrl(team?.image)}
                 alt=""
               />
-
               <LabeledInput
                 type="file"
-                name="banner_image"
+                name="image"
                 onChange={handleImageChange}
-                // required={!id}
+                required={!id}
                 register={register}
                 errors={errors}
               />
             </div>
-
             <LabeledInput
+              className="w-full md:w-1/2 p-1"
               name="name"
               required={true}
               register={register}
               errors={errors}
-              className="w-full md:w-1/2 p-1"
             />
             <LabeledInput
-              type="number"
-              name="serial"
+              className="w-full md:w-1/2 p-1"
+              name="designation"
               register={register}
               errors={errors}
+            />
+
+            <LabeledInput
               className="w-full md:w-1/2 p-1"
+              name="serial"
+              type="number"
+              register={register}
+              errors={errors}
             />
 
             <LabeledSelected
@@ -116,14 +122,47 @@ export default function MenuForm() {
               errors={errors}
               className="w-full md:w-1/2 p-1"
             >
-              <option value="">Select Status</option>
-
               {Object.entries(CommonStatus).map(([key, value]) => (
-                <option key={value} value={value}>
+                <option
+                  key={value}
+                  value={value}
+                  selected={value === CommonStatus.Active}
+                >
                   {key}
                 </option>
               ))}
             </LabeledSelected>
+
+            <LabeledInput
+              className="w-full md:w-1/2 p-1"
+              name="fb_link"
+              register={register}
+              errors={errors}
+            />
+            <LabeledInput
+              className="w-full md:w-1/2 p-1"
+              name="twitter_link"
+              register={register}
+              errors={errors}
+            />
+            <LabeledInput
+              className="w-full md:w-1/2 p-1"
+              name="instagram_link"
+              register={register}
+              errors={errors}
+            />
+            <LabeledInput
+              className="w-full md:w-1/2 p-1"
+              name="linkedin_link"
+              register={register}
+              errors={errors}
+            />
+            <LabeledInput
+              className="w-full md:w-1/2 p-1"
+              name="youtube_link"
+              register={register}
+              errors={errors}
+            />
           </div>
 
           {/* Forgot + Button */}

@@ -2,7 +2,7 @@
 const { Model } = require("sequelize");
 const { CommonStatus } = require("../constants/enums/CommonStatus.enum");
 module.exports = (sequelize, DataTypes) => {
-  class Menu extends Model {
+  class Team extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -10,29 +10,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // 🔹 A menu belongs to a menu
-      Menu.belongsTo(models.Menu, {
-        foreignKey: "parent_id",
-        as: "parent",
-      });
-
-      // 🔹 A menu can have many menus
-      Menu.hasMany(models.Menu, {
-        foreignKey: "parent_id",
-        as: "children",
-      });
-
-      // 🔹 A menu can have many ContentManage
-      Menu.hasMany(models.ContentManage, {
-        foreignKey: "menu_id",
-        as: "posts",
-      });
     }
   }
-  Menu.init(
+  Team.init(
     {
-      parent_id: DataTypes.INTEGER,
-      banner_image: DataTypes.STRING,
+      image: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -42,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
       },
+      designation: DataTypes.STRING,
       serial: DataTypes.INTEGER,
       status: {
         type: DataTypes.INTEGER,
@@ -50,12 +36,17 @@ module.exports = (sequelize, DataTypes) => {
           isIn: [Object.values(CommonStatus)],
         },
       },
+      fb_link: DataTypes.STRING,
+      twitter_link: DataTypes.STRING,
+      instagram_link: DataTypes.STRING,
+      linkedin_link: DataTypes.STRING,
+      youtube_link: DataTypes.STRING,
     },
     {
       sequelize,
-      modelName: "Menu",
-      tableName: "menus",
+      modelName: "Team",
+      tableName: "teams",
     },
   );
-  return Menu;
+  return Team;
 };

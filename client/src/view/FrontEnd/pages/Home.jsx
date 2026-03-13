@@ -5,6 +5,7 @@ import HeroSection from "./HomePageSection/HeroSection";
 import ClientReviewSection from "./HomePageSection/ClientReviewSection";
 import { useApiHook } from "../../../hook/customHook";
 import Blog from "./BlogPageSection/Blog";
+import TeamSection from "./HomePageSection/TeamSection";
 
 const Home = () => {
   const { data: blogs } = useApiHook("/blog");
@@ -504,94 +505,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="team-area section-padding30">
-          <div className="container">
-            <div className="row">
-              <div className="cl-xl-7 col-lg-8 col-md-10">
-                <div className="section-tittle mb-70">
-                  <span className="section-label">
-                    Our Professional members{" "}
-                  </span>
-                  <h2>Our Team Members</h2>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-xl-4 col-lg-4 col-md-6 col-sm-">
-                <div
-                  className="single-team mb-30"
-                  // data-aos="fade-up"
-                  // data-aos-delay="100"
-                >
-                  <div className="team-img">
-                    <img
-                      src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/team2.webp"
-                      alt="Ethan Welch"
-                      width="360"
-                      height="451"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <div className="team-caption">
-                    <h3>
-                      <a href="#">Ethan Welch</a>
-                    </h3>
-                    <span className="team-role">UX Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-4 col-lg-4 col-md-6 col-sm-">
-                <div
-                  className="single-team mb-30"
-                  // data-aos="fade-up"
-                  // data-aos-delay="200"
-                >
-                  <div className="team-img">
-                    <img
-                      src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/team3.webp"
-                      alt="Ethan Welch"
-                      width="360"
-                      height="451"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <div className="team-caption">
-                    <h3>
-                      <a href="#">Ethan Welch</a>
-                    </h3>
-                    <span className="team-role">UX Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-4 col-lg-4 col-md-6 col-sm-">
-                <div
-                  className="single-team mb-30"
-                  // data-aos="fade-up"
-                  // data-aos-delay="300"
-                >
-                  <div className="team-img">
-                    <img
-                      src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/team1.webp"
-                      alt="Ethan Welch"
-                      width="360"
-                      height="443"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <div className="team-caption">
-                    <h3>
-                      <a href="#">Ethan Welch</a>
-                    </h3>
-                    <span className="team-role">UX Designer</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+       <TeamSection></TeamSection>
 
         <div
           className="pricing-area section-bg"

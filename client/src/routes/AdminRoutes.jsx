@@ -19,6 +19,8 @@ import CategoryIndex from "../view/Admin/Category/CategoryIndex";
 import CategoryForm from "../view/Admin/Category/CategoryForm";
 import GeneralSetting from "../view/Admin/Setting/GeneralSetting";
 import SocialLinks from "../view/Admin/Setting/SocialLinks";
+import TeamIndex from "../view/Admin/Team/TeamIndex";
+import TeamForm from "../view/Admin/Team/TeamForm";
 
 export const AdminRoutes = (
   <>
@@ -52,10 +54,17 @@ export const AdminRoutes = (
         <Route path="create" element={<SliderForm />} />
         <Route path="edit/:id" element={<SliderForm />} />
       </Route>
+
       <Route path="review">
         <Route path="" element={<ReviewIndex />} />
         <Route path="create" element={<ReviewForm />} />
         <Route path="edit/:id" element={<ReviewForm />} />
+      </Route>
+
+      <Route path="team">
+        <Route path="" element={<TeamIndex />} />
+        <Route path="create" element={<TeamForm />} />
+        <Route path="edit/:id" element={<TeamForm />} />
       </Route>
 
       <Route path="blog">

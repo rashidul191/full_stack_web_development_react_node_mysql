@@ -39,8 +39,12 @@ const AdminSidebar = () => {
           path: "/admin/slider",
         },
         {
-          title: "Review",
+          title: "Client Review",
           path: "/admin/review",
+        },
+        {
+          title: "Team",
+          path: "/admin/team",
         },
       ],
     },

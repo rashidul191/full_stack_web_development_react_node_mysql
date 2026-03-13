@@ -6,7 +6,7 @@ import { imageUrl } from "../../../../utility/imageUrl";
 import { Link } from "react-router-dom";
 
 export default function HeroSection() {
-  const { data: heroSlides } = useApiHook("/admin/slider");
+  const { data: heroSlides } = useApiHook("/slider");
   return (
     <>
       <div className="slider-area">

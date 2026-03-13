@@ -4,13 +4,13 @@ import HeaderSection from "../../Components/HeaderSection";
 import { AuthContext } from "../../../context/AuthContext";
 import LabeledInput from "../../Components/LabeledInput";
 import SubmitBtn from "../../Components/SubmitBtn";
-import LabeledTextarea from "../../Components/LabeledTextarea";
 import { useApiHook, useImagePreview } from "../../../hook/customHook";
 import Loading from "../../layouts/Shared/Loading";
 import { useNavigate, useParams } from "react-router-dom";
 import { imageUrl } from "../../../utility/imageUrl";
 import LabeledSelected from "../../Components/LabeledSelected";
 import { CommonStatus } from "../../../enum/commonStatus";
+import slugify from "slugify";
 
 export default function SubMenuForm() {
   const { previewImage, handleImageChange } = useImagePreview();
@@ -48,8 +48,10 @@ export default function SubMenuForm() {
   // Submit
   // ==========================
   const onSubmit = async (data) => {
-    const slug = data?.name?.toLowerCase().replace(/\s+/g, "-");
-    data.slug = slug;
+    data.slug = slugify(data?.name, {
+      lower: true,
+      strict: true,
+    });
     let res;
     if (id) {
       res = await updateData(id, data, true); // true for image
