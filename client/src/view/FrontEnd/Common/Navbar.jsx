@@ -1,11 +1,17 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import ApplicationLogo from "../../Components/ApplicationLogo";
 import { useApiHook } from "../../../hook/customHook";
 import { CommonStatus } from "../../../enum/commonStatus";
+import { Clock, Facebook } from "lucide-react";
+import { FaFacebook, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { FaFacebookF } from "react-icons/fa6";
+import { useBusinessSettings } from "../../../utility/businessSetting";
+import { BsInstagram, BsYoutube } from "react-icons/bs";
 
 const Navbar = () => {
+  const { businessSetting } = useBusinessSettings();
   // const userInfo = useContext(AuthContext);
   // const email = userInfo?.auth?.auth?.email;
   const { data: menus } = useApiHook("/admin/menu");
@@ -15,6 +21,14 @@ const Navbar = () => {
       (item) => item.parent_id === null && item?.status === CommonStatus.Active,
     );
   // const { auth, logoutUser } = userInfo;
+
+  const socialLinks = [
+    { key: "fb_link", icon: <FaFacebookF />, label: "Facebook" },
+    { key: "twitter_link", icon: <FaTwitter />, label: "Twitter" },
+    { key: "linkedin_link", icon: <FaLinkedinIn />, label: "LinkedIn" },
+    { key: "youtube_link", icon: <BsYoutube />, label: "Youtube" },
+    { key: "instagram_link", icon: <BsInstagram />, label: "Instagram" },
+  ];
 
   const menuLinks = (
     <>
@@ -64,8 +78,6 @@ const Navbar = () => {
     </>
   );
 
-  // console.log(menuLinks, logoutUser);
-
   return (
     <>
       {/* <div id="preloader-active">
@@ -95,36 +107,32 @@ const Navbar = () => {
                     <div className="header-info-left">
                       <ul>
                         <li>
-                          <i className="far fa-clock"></i> Mon - SAT: 6.00 am -
-                          10.00 pm
+                          <span className="d-flex align-items-center">
+                            {" "}
+                            <Clock></Clock>
+                            <span className="ms-2"> {businessSetting?.time_date}</span>
+                          </span>
                         </li>
-                        <li>Sun: Closed</li>
                       </ul>
                     </div>
                   </div>
                   <div className="col-xl-6 col-lg-6">
                     <div className="header-info-right">
                       <ul className="header-social">
-                        <li>
-                          <a href="#" aria-label="Facebook">
-                            <i className="fab fa-facebook-f"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" aria-label="Twitter">
-                            <i className="fab fa-twitter"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" aria-label="LinkedIn">
-                            <i className="fab fa-linkedin-in"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" aria-label="Google Plus">
-                            <i className="fab fa-google-plus-g"></i>
-                          </a>
-                        </li>
+                        {socialLinks.map((social) =>
+                          businessSetting?.[social.key] ? (
+                            <li key={social.key}>
+                              <a
+                                href={businessSetting[social.key]}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={social.label}
+                              >
+                                {social.icon}
+                              </a>
+                            </li>
+                          ) : null,
+                        )}
                       </ul>
                     </div>
                   </div>

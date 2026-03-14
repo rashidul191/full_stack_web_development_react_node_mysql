@@ -122,6 +122,14 @@ export default function GeneralSetting() {
               register={register}
               errors={errors}
             />
+            <LabeledInput
+              className="w-full md:w-1/2 p-1"
+              label="Office Time Date"
+              name="time_date"
+              value={businessSetting?.time_date}
+              register={register}
+              errors={errors}
+            />
 
             <LabeledInput
               className="w-full md:w-1/2 p-1"

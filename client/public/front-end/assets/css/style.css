@@ -5016,6 +5016,13 @@ fieldset:disabled .btn {
   float: right !important;
 }
 
+.footer-social.float-end {
+  display: flex;
+}
+.footer-social.float-end li {
+  padding: 0 10px;
+}
+
 .float-none {
   float: none !important;
 }
@@ -13398,11 +13405,12 @@ hero-btn {
 }
 .header-area .header-top .header-info-right .header-social li {
   display: inline-block;
+  padding: 0px 10px;
 }
 .header-area .header-top .header-info-right .header-social li a {
   color: #fff;
   font-size: 16px;
-  padding-left: 25px;
+  /* padding-left: 25px; */
 }
 .header-area .header-top .header-info-right .header-social li a:hover {
   color: #14435c;
@@ -14706,8 +14714,7 @@ hero-btn {
   font-size: 16px;
 }
 .footer-area .footer-bottom {
-  padding-bottom: 50px;
-  padding-top: 30px;
+  padding: 30px 0;
 }
 .footer-area .footer-bottom .footer-copy-right p {
   color: #bdbdbd;

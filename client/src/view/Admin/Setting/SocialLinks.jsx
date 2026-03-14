@@ -78,8 +78,8 @@ export default function SocialLinks() {
             />
             <LabeledInput
               className="w-full md:w-1/2 p-1"
-              name="twiter_link"
-              value={businessSetting?.twiter_link}
+              name="twitter_link"
+              value={businessSetting?.twitter_link}
               register={register}
               errors={errors}
             />
