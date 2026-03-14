@@ -119,7 +119,7 @@ const Footer = () => {
                           action="#"
                           method="get"
                           className="subscribe_form relative mail_part"
-                          noValidate="true"
+                          noValidate={true}
                         >
                           <input
                             type="email"

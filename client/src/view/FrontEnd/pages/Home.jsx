@@ -1,11 +1,11 @@
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+
 import HeroSection from "./HomePageSection/HeroSection";
 import ClientReviewSection from "./HomePageSection/ClientReviewSection";
 import { useApiHook } from "../../../hook/customHook";
 import Blog from "./BlogPageSection/Blog";
 import TeamSection from "./HomePageSection/TeamSection";
+import ClientBrandSection from "./HomePageSection/ClientBrandSection";
 
 const Home = () => {
   const { data: blogs } = useApiHook("/blog");
@@ -505,7 +505,7 @@ const Home = () => {
           </div>
         </div>
 
-       <TeamSection></TeamSection>
+        <TeamSection></TeamSection>
 
         <div
           className="pricing-area section-bg"
@@ -895,75 +895,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="brand-area pb-140">
-          <div className="container">
-            <div className="brand-active brand-border pb-40">
-              <Swiper
-                modules={[Autoplay]}
-                spaceBetween={30}
-                loop={true}
-                autoplay={{ delay: 2000 }}
-                breakpoints={{
-                  320: { slidesPerView: 2 },
-                  576: { slidesPerView: 3 },
-                  768: { slidesPerView: 4 },
-                  1024: { slidesPerView: 5 },
-                }}
-              >
-                <SwiperSlide>
-                  <img
-                    src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/brand1.webp"
-                    alt="Partner brand"
-                    width="166"
-                    height="41"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img
-                    src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/brand2.webp"
-                    alt="Partner brand"
-                    width="166"
-                    height="41"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img
-                    src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/brand3.webp"
-                    alt="Partner brand"
-                    width="166"
-                    height="41"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img
-                    src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/brand4.webp"
-                    alt="Partner brand"
-                    width="166"
-                    height="41"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img
-                    src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/brand5.webp"
-                    alt="Partner brand"
-                    width="166"
-                    height="41"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </SwiperSlide>
-              </Swiper>
-            </div>
-          </div>
-        </div>
+        <ClientBrandSection></ClientBrandSection>
       </main>
     </>
   );

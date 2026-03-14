@@ -48,6 +48,10 @@ const AdminSidebar = () => {
           title: "Team",
           path: "/admin/team",
         },
+        {
+          title: "Client Brand",
+          path: "/admin/client-brand",
+        },
       ],
     },
     {

@@ -23,6 +23,8 @@ import TeamIndex from "../view/Admin/Team/TeamIndex";
 import TeamForm from "../view/Admin/Team/TeamForm";
 import ContactMessageIndex from "../view/Admin/ContactMessage/ContactMessageIndex";
 import ContactMessageShow from "../view/Admin/ContactMessage/ContactMessageShow";
+import ClientBrandIndex from "../view/Admin/ClientBrand/ClientBrandIndex";
+import ClientBrandForm from "../view/Admin/ClientBrand/ClientBrandForm";
 
 export const AdminRoutes = (
   <>
@@ -79,6 +81,12 @@ export const AdminRoutes = (
         <Route path="" element={<CategoryIndex />} />
         <Route path="create" element={<CategoryForm />} />
         <Route path="edit/:id" element={<CategoryForm />} />
+      </Route>
+
+      <Route path="client-brand">
+        <Route path="" element={<ClientBrandIndex />} />
+        <Route path="create" element={<ClientBrandForm />} />
+        <Route path="edit/:id" element={<ClientBrandForm />} />
       </Route>
 
       <Route path="contact-message">

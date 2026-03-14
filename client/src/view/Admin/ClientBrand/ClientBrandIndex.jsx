@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 import { useApiHook } from "../../../hook/customHook";
 import Loading from "../../layouts/Shared/Loading";
 
-export default function CategoryIndex() {
+export default function ClientBrandIndex() {
   const {
-    data: categories,
+    data: clientBrands,
     loading,
     deleteData,
-  } = useApiHook("/admin/category");
+  } = useApiHook("/admin/client-brand");
 
   const columns = [
     {
@@ -26,7 +26,7 @@ export default function CategoryIndex() {
       sortable: true,
     },
     {
-      name: "Slug",
+      name: "Link",
       selector: (row) => row.slug,
     },
     {
@@ -56,15 +56,15 @@ export default function CategoryIndex() {
   return (
     <>
       <HeaderSection
-        title={"Category List"}
-        createLink={"/admin/category/create"}
+        title={"Client Brand List"}
+        createLink={"/admin/client-brand/create"}
       ></HeaderSection>
 
       <div className="shadow">
         <TableData
           columns={columns}
-          data={categories?.sort((a, b) => b.id - a.id) || []}
-          searchKeys={["name", "slug"]}
+          data={clientBrands?.sort((a, b) => b.id - a.id) || []}
+          searchKeys={["name", "link"]}
         />
       </div>
     </>

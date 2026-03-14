@@ -13,7 +13,7 @@ export default function HeroSection() {
         <Swiper
           modules={[Autoplay, Navigation]}
           slidesPerView={1}
-          loop
+          loop={heroSlides?.length > 1}
           autoplay={{ delay: 2000 }}
           navigation={{
             nextEl: ".hero-next",
