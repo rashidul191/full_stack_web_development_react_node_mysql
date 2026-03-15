@@ -23,4 +23,6 @@ router.use("/contact-message", require("./web/contact-message.route"));
 router.use("/service", require("./web/service.route"));
 router.use("/faq", require("./web/faq.route"));
 
+router.use("/activity", require("./web/activity.route"));
+
 module.exports = router;

@@ -41,8 +41,20 @@ const AdminSidebar = () => {
           path: "/admin/slider",
         },
         {
+          title: "Service",
+          path: "/admin/service",
+        },
+        {
+          title: "Video Section",
+          path: "/admin/setting/video-section",
+        },
+        {
           title: "Client Review",
           path: "/admin/review",
+        },
+        {
+          title: "Actvity",
+          path: "/admin/activity",
         },
         {
           title: "Team",
@@ -52,10 +64,7 @@ const AdminSidebar = () => {
           title: "Client Brand",
           path: "/admin/client-brand",
         },
-        {
-          title: "Service",
-          path: "/admin/service",
-        },
+
         {
           title: "FAQ List",
           path: "/admin/faq",

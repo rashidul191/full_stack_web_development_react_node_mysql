@@ -8,15 +8,20 @@ import TeamSection from "./HomePageSection/TeamSection";
 import ClientBrandSection from "./HomePageSection/ClientBrandSection";
 import FAQSection from "./HomePageSection/FAQSection";
 import ServiceSection from "./HomePageSection/ServiceSection";
+import { useBusinessSettings } from "../../../utility/businessSetting";
+import { imageUrl } from "../../../utility/imageUrl";
+import { CheckCircle, PlayCircle } from "lucide-react";
+import ActivitySection from "./HomePageSection/ActivitySection";
 
 const Home = () => {
   const { data: blogs } = useApiHook("/blog");
+  const { businessSetting } = useBusinessSettings();
   return (
     <>
       <main>
         <HeroSection></HeroSection>
 
-      <ServiceSection></ServiceSection>
+        <ServiceSection></ServiceSection>
 
         <div
           className="support-company-area pt-100 pb-100 section-bg fix"
@@ -79,24 +84,27 @@ const Home = () => {
                   // data-aos="fade-right"
                   // data-aos-delay="100"
                 >
-                  <div className="video-thumbnail">
-                    <img
-                      src="https://preview.colorlib.com/theme/consultingbiz/assets/img/gallery/services1.webp"
-                      alt="Video thumbnail"
-                      width="555"
-                      height="394"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <div className="video-overlay">
-                      <a
-                        href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-                        className="play-btn glightbox"
-                      >
-                        <i className="fas fa-play"></i>
-                      </a>
+                  {businessSetting?.video_thumbnal ? (
+                    <div className="video-thumbnail">
+                      <img
+                        src={imageUrl(businessSetting?.video_thumbnal)}
+                        alt="Video thumbnail"
+                        width="555"
+                        height="394"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className="video-overlay">
+                        <a
+                          // target="_blank"
+                          href={businessSetting?.video_youtube_link ?? "#"}
+                          className="play-btn glightbox"
+                        >
+                          <PlayCircle></PlayCircle>
+                        </a>
+                      </div>
                     </div>
-                  </div>
+                  ) : null}
                 </div>
               </div>
               <div className="col-lg-6">
@@ -105,27 +113,18 @@ const Home = () => {
                   // data-aos="fade-left"
                   // data-aos-delay="200"
                 >
-                  <h2>See How We Transform Businesses</h2>
-                  <p>
-                    Watch our brief introduction to understand how ConsultingBiz
-                    has helped hundreds of companies achieve their goals through
-                    strategic planning and expert guidance.
-                  </p>
+                  <h2>{businessSetting?.video_title}</h2>
+                  <p>{businessSetting?.video_content}</p>
                   <ul className="video-features">
-                    <li>
-                      <i className="fas fa-check"></i> 15+ years of industry
-                      experience
-                    </li>
-                    <li>
-                      <i className="fas fa-check"></i> Proven methodology and
-                      frameworks
-                    </li>
-                    <li>
-                      <i className="fas fa-check"></i> Dedicated team of experts
-                    </li>
-                    <li>
-                      <i className="fas fa-check"></i> Results-driven approach
-                    </li>
+                    {[1, 2, 3, 4, 5].map((num) => {
+                      const point = businessSetting?.[`video_point_${num}`];
+
+                      return point ? (
+                        <li key={num}>
+                          <CheckCircle /> {point}
+                        </li>
+                      ) : null;
+                    })}
                   </ul>
                 </div>
               </div>
@@ -397,36 +396,7 @@ const Home = () => {
 
         <ClientReviewSection></ClientReviewSection>
 
-        <div className="count-down-area pb-120">
-          <div className="container">
-            <div className="row justify-content-between">
-              <div className="col-lg-3 col-md-6 col-sm-6">
-                <div className="single-counter text-center">
-                  <span className="counter">8705</span>
-                  <p>Projects Completed</p>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6 col-sm-6">
-                <div className="single-counter active text-center">
-                  <span className="counter">480</span>
-                  <p> Active Clients</p>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6 col-sm-6">
-                <div className="single-counter text-center">
-                  <span className="counter">626</span>
-                  <p>Cups of Coffee</p>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6 col-sm-6">
-                <div className="single-counter text-center">
-                  <span className="counter">9774</span>
-                  <p>Happy Clients</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ActivitySection></ActivitySection>
 
         <TeamSection></TeamSection>
 

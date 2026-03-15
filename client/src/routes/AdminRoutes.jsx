@@ -29,6 +29,9 @@ import FAQIndex from "../view/Admin/FAQ/FAQIndex";
 import FAQForm from "../view/Admin/FAQ/FAQForm";
 import ServiceIndex from "../view/Admin/Service/ServiceIndex";
 import ServiceForm from "../view/Admin/Service/ServiceForm";
+import VideoSectionForHomePage from "../view/Admin/Setting/VideoSectionForHomePage";
+import ActivityIndex from "../view/Admin/Activity/ActivityIndex";
+import ActivityForm from "../view/Admin/Activity/ActivityForm";
 
 export const AdminRoutes = (
   <>
@@ -75,6 +78,12 @@ export const AdminRoutes = (
         <Route path="edit/:id" element={<TeamForm />} />
       </Route>
 
+      <Route path="activity">
+        <Route path="" element={<ActivityIndex />} />
+        <Route path="create" element={<ActivityForm />} />
+        <Route path="edit/:id" element={<ActivityForm />} />
+      </Route>
+
       <Route path="blog">
         <Route path="" element={<BlogIndex />} />
         <Route path="create" element={<BlogForm />} />
@@ -111,6 +120,7 @@ export const AdminRoutes = (
       </Route>
 
       <Route path="setting">
+        <Route path="video-section" element={<VideoSectionForHomePage />} />
         <Route path="general" element={<GeneralSetting />} />
         <Route path="social-links" element={<SocialLinks />} />
         {/* <Route path="profile" element={<GeneralSetting />} /> */}
