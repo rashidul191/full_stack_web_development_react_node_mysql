@@ -63,8 +63,8 @@ export default function AboutIndex() {
               />
 
               <LabeledInput
+                label="Image (545x570px)"
                 type="file"
-                label="Image"
                 name="about_left_image"
                 onChange={handleImageChange}
                 register={register}

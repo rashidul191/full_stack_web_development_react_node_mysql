@@ -34,6 +34,9 @@ module.exports.create = async (req, res, next) => {
   try {
     const data = req.body;
 
+    // generate unique slug
+    data.slug = await generateUniqueSlug(Blog, data.title || data.name);
+
     // image manage
     data.image = req.file ? imageHandler.store(req.file) : null;
 
@@ -73,6 +76,14 @@ module.exports.update = async (req, res, next) => {
 
     const record = await Blog.findByPk(id);
     if (!record) throw new Error("Record not found");
+
+    // check name/title change
+    if (
+      (data.name && data.name !== record.name) ||
+      (data.title && data.title !== record.title)
+    ) {
+      data.slug = await generateUniqueSlug(Blog, data.title || data.name);
+    }
 
     if (req.file) {
       data.image = imageHandler.store(req.file);

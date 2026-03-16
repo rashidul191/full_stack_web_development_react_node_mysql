@@ -18,20 +18,20 @@ export default function SliderIndex() {
     },
     {
       name: "Title",
-      selector: (row) => row.title,
+      selector: (row) => row.title || "--",
       sortable: true,
     },
     {
       name: "Sub Title",
-      selector: (row) => row.sub_title,
+      selector: (row) => row.sub_title || "--",
     },
     {
       name: "Button Text",
-      selector: (row) => row.button_text,
+      selector: (row) => row.button_text || "--",
     },
     {
       name: "Page Link",
-      selector: (row) => row.button_link,
+      selector: (row) => row.button_link || "--",
     },
     {
       name: "Action",

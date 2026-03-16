@@ -51,7 +51,6 @@ export default function VideoSectionForHomePage() {
       <div className="shadow-lg p-4 rounded mt-5">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <div className="w-full md:flex flex-wrap items-end">
-
             <div className="w-full md:w-1/2 p-1">
               <img
                 className="w-12 h-12"
@@ -63,6 +62,7 @@ export default function VideoSectionForHomePage() {
               />
 
               <LabeledInput
+                label="Video Thumbnal (545x340px)"
                 type="file"
                 name="video_thumbnal"
                 onChange={handleImageChange}
@@ -133,13 +133,11 @@ export default function VideoSectionForHomePage() {
               register={register}
               errors={errors}
             />
-
           </div>
 
           <div className="flex items-center justify-end text-sm">
             <SubmitBtn value="Submit" />
           </div>
-
         </form>
       </div>
     </>

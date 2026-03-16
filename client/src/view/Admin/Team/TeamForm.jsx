@@ -8,10 +8,8 @@ import { useApiHook, useImagePreview } from "../../../hook/customHook";
 import Loading from "../../layouts/Shared/Loading";
 import { useNavigate, useParams } from "react-router-dom";
 import { imageUrl } from "../../../utility/imageUrl";
-import RichTextEditor from "../../Components/RichTextEditor";
 import { CommonStatus } from "../../../enum/commonStatus";
 import LabeledSelected from "../../Components/LabeledSelected";
-import slugify from "slugify";
 
 export default function TeamForm() {
   const { previewImage, handleImageChange } = useImagePreview();
@@ -27,7 +25,6 @@ export default function TeamForm() {
   const { data: team, loading } = useApiHook(id ? `/admin/team/${id}` : null); // custom hook
 
   const {
-    control,
     register,
     reset,
     formState: { errors },
@@ -47,10 +44,6 @@ export default function TeamForm() {
   // Submit
   // ==========================
   const onSubmit = async (data) => {
-    data.slug = slugify(data?.name, {
-      lower: true,
-      strict: true,
-    });
     let res;
     if (id) {
       res = await updateData(id, data, true); // true for image
@@ -86,6 +79,7 @@ export default function TeamForm() {
                 alt=""
               />
               <LabeledInput
+                label="Image (355x450px)"
                 type="file"
                 name="image"
                 onChange={handleImageChange}

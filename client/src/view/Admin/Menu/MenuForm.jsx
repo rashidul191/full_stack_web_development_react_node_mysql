@@ -11,7 +11,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { imageUrl } from "../../../utility/imageUrl";
 import LabeledSelected from "../../Components/LabeledSelected";
 import { CommonStatus } from "../../../enum/commonStatus";
-import slugify from "slugify";
 
 export default function MenuForm() {
   const { previewImage, handleImageChange } = useImagePreview();
@@ -46,10 +45,6 @@ export default function MenuForm() {
   // Submit
   // ==========================
   const onSubmit = async (data) => {
-      data.slug = slugify(data?.name, {
-          lower: true,
-          strict: true,
-        });
     let res;
     if (id) {
       res = await updateData(id, data, true); // true for image

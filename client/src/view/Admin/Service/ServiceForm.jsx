@@ -45,6 +45,7 @@ export default function ServiceForm() {
   // Submit
   // ==========================
   const onSubmit = async (data) => {
+    console.log(data);
     let res;
     if (id) {
       res = await updateData(id, data, true); // true for image
@@ -83,6 +84,7 @@ export default function ServiceForm() {
               />
 
               <LabeledInput
+                label="Image (150px150px)"
                 type="file"
                 name="image"
                 onChange={handleImageChange}

@@ -6,10 +6,6 @@ const router = express.Router();
  * /api/admin _____
  */
 
-// admin auth routes
-// router.use("/login", require("./admin/auth/login.route"));
-// router.use("/register", require("./admin/auth/register.route"));
-
 //  Home Page Route
 
 router.use("/menu", require("./admin/menu.route"));

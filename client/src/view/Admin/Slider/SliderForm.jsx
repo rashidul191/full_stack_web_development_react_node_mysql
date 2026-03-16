@@ -81,6 +81,7 @@ export default function SliderForm() {
               />
 
               <LabeledInput
+                label="Image (1920x600px)"
                 type="file"
                 name="image"
                 onChange={handleImageChange}
@@ -91,7 +92,7 @@ export default function SliderForm() {
             </div>
 
             <LabeledInput
-              name="title"          
+              name="title"
               register={register}
               errors={errors}
               className="w-full md:w-1/2 p-1"

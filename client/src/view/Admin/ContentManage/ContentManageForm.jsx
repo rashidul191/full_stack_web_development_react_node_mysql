@@ -10,7 +10,6 @@ import Loading from "../../layouts/Shared/Loading";
 import { useNavigate, useParams } from "react-router-dom";
 import { imageUrl } from "../../../utility/imageUrl";
 import RichTextEditor from "../../Components/RichTextEditor";
-import slugify from "slugify";
 import LabeledSelected from "../../Components/LabeledSelected";
 
 export default function ContentManageForm() {
@@ -50,12 +49,6 @@ export default function ContentManageForm() {
   // Submit
   // ==========================
   const onSubmit = async (data) => {
-    // console.log(data);
-    data.slug = slugify(data?.title, {
-      lower: true,
-      strict: true,
-    });
-
     let res;
     if (id) {
       res = await updateData(id, data, true); // true for image
