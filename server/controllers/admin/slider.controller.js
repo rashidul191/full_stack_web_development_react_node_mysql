@@ -1,5 +1,5 @@
 const { Slider } = require("../../models/index.js");
-const { sendSuccess, sendError } = require("../../utility/response.handle.js");
+const { sendSuccess } = require("../../utility/response.handle.js");
 const ImageFile = require("../../lib/ImageFile.js");
 const imageHandler = new ImageFile("sliders");
 const {
@@ -10,13 +10,13 @@ const {
   deleteService,
 } = require("../../utility/curd.service.js");
 
-module.exports.index = async (req, res) => {
+module.exports.index = async (req, res, next) => {
   try {
     const result = await indexService(Slider);
 
     sendSuccess(res, "Find all data successful", result);
   } catch (error) {
-    sendError(res, "Can't find data in the database!!", error);
+    next(error);
   }
 };
 
@@ -28,21 +28,19 @@ module.exports.create = async (req, res, next) => {
     sendSuccess(res, "Successfully create Slider!", result);
   } catch (error) {
     next(error);
-    console.log("create: ", error);
-    sendError(res, "Can't create data!!", error);
   }
 };
 
-module.exports.show = async (req, res) => {
+module.exports.show = async (req, res, next) => {
   try {
     const result = await showService(Slider, req.params.id);
     sendSuccess(res, "Successfully found single data!!", result);
   } catch (error) {
-    sendError(res, "Can't find data in the database!!", error);
+    next(error);
   }
 };
 
-module.exports.update = async (req, res) => {
+module.exports.update = async (req, res, next) => {
   try {
     const id = req.params.id;
     const data = req.body;
@@ -56,7 +54,7 @@ module.exports.update = async (req, res) => {
     const result = await updateService(Slider, id, data);
     sendSuccess(res, "Updated successfully!!", result);
   } catch (error) {
-    sendError(res, "Can't update Slider!!", error);
+    next(error);
   }
 };
 
@@ -66,6 +64,5 @@ module.exports.delete = async (req, res, next) => {
     sendSuccess(res, "Delete successfully!!", result);
   } catch (error) {
     next(error);
-    sendError(res, "Can't delete data!!", error);
   }
 };

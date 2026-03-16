@@ -6,13 +6,14 @@ const sendSuccess = (res, message, data = {}, statusCode = 200) => {
   });
 };
 
-const sendError = (res, message, error = {}, statusCode = 400) => {
+const sendError = (res, message, error = null, statusCode = 500) => {
   return res.status(statusCode).json({
     status: "fail",
     message,
-    error: error.message || error,
+    error: error?.message || error,
   });
 };
+
 
 module.exports = {
   sendSuccess,
