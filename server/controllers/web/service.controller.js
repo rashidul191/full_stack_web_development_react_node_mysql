@@ -1,24 +1,27 @@
 const { Service } = require("../../models/index.js");
 
-const { sendSuccess, sendError } = require("../../utility/response.handle.js");
+const { sendSuccess } = require("../../utility/response.handle.js");
 
 const { indexService, showService } = require("../../utility/curd.service.js");
-module.exports.index = async (req, res) => {
+
+module.exports.index = async (req, res, next) => {
   try {
     const data = await indexService(Service);
 
     sendSuccess(res, "Successfully found all data!!", data);
   } catch (error) {
-    sendError(res, "Can't find data in the database!!", error);
+    next(error);
   }
 };
-module.exports.show = async (req, res) => {
+
+module.exports.show = async (req, res, next) => {
   try {
-    // const data = await Service.findByPk(req.params.id);
     const id = req.params.id;
-    const data = await showService(Service, slug);
+
+    const data = await showService(Service, id);
+
     sendSuccess(res, "Successfully found single data!!", data);
   } catch (error) {
-    sendError(res, "Can't find data in the database!!", error);
+    next(error);
   }
 };

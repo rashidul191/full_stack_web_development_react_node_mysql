@@ -1,6 +1,6 @@
 const { Admin } = require("../../../models/index.js");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+
 const {
   sendSuccess,
   sendError,
@@ -9,111 +9,105 @@ const {
 const { Roles } = require("../../../constants/enums/Roles.enum.js");
 
 const {
-  indexService,
   createService,
   showService,
-  updateService,
-  deleteService,
 } = require("../../../utility/curd.service.js");
+
 const { generateToken } = require("../../../utility/jwt-token.js");
+
 const ImageFile = require("../../../lib/ImageFile.js");
 const imageHandler = new ImageFile("admins");
 
-module.exports.login = async (req, res) => {
+module.exports.login = async (req, res, next) => {
   try {
-    // console.log(req.body);
     const { email, password } = req.body;
-    // 1️⃣ Find user by username
+
     const auth = await Admin.findOne({ where: { email } });
-    // console.log(auth)
+
     if (!auth) {
       return sendError(
         res,
         "Authorization failed!",
-        (error = { message: "Invalid email or password" }),
-        (statusCode = 401),
+        { message: "Invalid email or password" },
+        401,
       );
     }
 
-    // 2️⃣ Compare password
     const isMatch = await bcrypt.compare(password, auth.password);
-    // console.log(isMatch);
+
     if (!isMatch) {
       return sendError(
         res,
         "Authorization failed!",
-        (error = { message: "Invalid email or password" }),
-        (statusCode = 401),
+        { message: "Invalid email or password" },
+        401,
       );
     }
 
     const token = generateToken(auth);
 
-    // 4️⃣ Send success response
-    sendSuccess(res, "Admin Login successful", { auth: auth, token: token });
+    sendSuccess(res, "Admin Login successful", {
+      auth,
+      token,
+    });
   } catch (error) {
-    sendError(res, "Can't find data in the database!!", error);
+    next(error);
   }
 };
 
 module.exports.register = async (req, res, next) => {
   try {
-    // console.log(Roles.ADMIN);
     const { username, name, phone, email, password, role } = req.body;
 
-    // 1️⃣ Basic validation
     if (!username || !name || !phone || !email || !password) {
       return sendError(res, "All fields are required");
     }
 
-    // 2️⃣ Check if user already exists (username or email)
     const existingAuth = await Admin.findOne({
-      where: {
-        email: email,
-      },
+      where: { email },
     });
 
     if (existingAuth) {
       return sendError(res, "Email already exists");
     }
 
-    // 3️⃣  Create user
     const newAuthData = {
       username,
       name,
       phone,
       email,
-      password, // password hash form model
+      password,
       role: role ?? Roles.ADMIN,
       avatar: req.file ? imageHandler.store(req.file) : null,
     };
 
     const authCreated = await createService(Admin, newAuthData);
+
     const token = generateToken(authCreated);
-    // console.log(userResponse, newUserData);
+
     sendSuccess(res, "Successfully create account!!", {
       auth: authCreated,
-      token: token,
+      token,
     });
   } catch (error) {
     next(error);
-    sendError(res, "Can't create data!!", error);
   }
 };
 
-module.exports.show = async (req, res) => {
+module.exports.show = async (req, res, next) => {
   try {
-    const data = await showService(Blog, req.params.id);
+    const data = await showService(Admin, req.params.id);
+
     sendSuccess(res, "Successfully found single data!!", data);
   } catch (error) {
-    sendError(res, "Can't find data in the database!!", error);
+    next(error);
   }
 };
 
 module.exports.update = (req, res) => {
-  res.send("Update blog");
+  res.send("Update admin");
 };
 
 module.exports.delete = (req, res) => {
-  res.send("Delete blog");
+  res.send("Delete admin");
 };

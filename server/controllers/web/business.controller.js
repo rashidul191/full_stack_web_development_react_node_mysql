@@ -1,6 +1,6 @@
 const { BusinessSetting } = require("../../models/index.js");
 
-const { sendSuccess, sendError } = require("../../utility/response.handle.js");
+const { sendSuccess } = require("../../utility/response.handle.js");
 
 module.exports.index = async (req, res, next) => {
   try {
@@ -8,6 +8,5 @@ module.exports.index = async (req, res, next) => {
     sendSuccess(res, "Find data successfully", data);
   } catch (error) {
     next(error);
-    sendError(res, "Can't find data in the database!!", error);
   }
 };
