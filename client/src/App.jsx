@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import NotFound from "./view/FrontEnd/Pages/NotFound";
+import NotFound from "./views/FrontEnd/Pages/NotFound";
 import { FrontendRoutes } from "./routes/FrontendRoutes";
 import { UserRoutes } from "./routes/UserRoutes";
 import { AdminRoutes } from "./routes/AdminRoutes";

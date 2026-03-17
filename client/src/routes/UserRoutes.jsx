@@ -1,7 +1,7 @@
 import React from "react";
 import { ROLES } from "../enum/Roles";
 import PrivateRoute from "./PrivateRoute";
-import UserLayout from "../view/layouts/UserLayout";
+import UserLayout from "../views/layouts/UserLayout";
 import { Route } from "react-router-dom";
 
 export const UserRoutes = (

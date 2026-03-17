@@ -1,8 +1,8 @@
 import React from "react";
 
 import { Route } from "react-router-dom";
-import LoginUser from "../view/Auth/LoginUser";
-import RegistrationUser from "../view/Auth/RegistrationUser";
+import LoginUser from "../views/Auth/LoginUser";
+import RegistrationUser from "../views/Auth/RegistrationUser";
 
 export const AuthRoutes = (
   <>

@@ -1,14 +1,14 @@
 import { Route } from "react-router-dom";
 
-import Home from "../view/FrontEnd/Pages/Home";
-import BlogPage from "../view/FrontEnd/pages/BlogPage";
-import BlogDetails from "../view/FrontEnd/Pages/BlogDetails";
-import FrontendLayout from "../view/layouts/FrontEndLayout";
-import TopMenuContent from "../view/FrontEnd/Pages/TopMenuContent";
-import SubMenuContent from "../view/FrontEnd/Pages/SubMenuContent";
-import Contact from "../view/FrontEnd/pages/ContactPage";
-import AboutPage from "../view/FrontEnd/pages/AboutPage";
-import ContentDetails from "../view/FrontEnd/pages/ContentDetails";
+import Home from "../views/FrontEnd/Pages/Home";
+import BlogPage from "../views/FrontEnd/pages/BlogPage";
+import BlogDetails from "../views/FrontEnd/Pages/BlogDetails";
+import FrontendLayout from "../views/layouts/FrontEndLayout";
+import TopMenuContent from "../views/FrontEnd/Pages/TopMenuContent";
+import SubMenuContent from "../views/FrontEnd/Pages/SubMenuContent";
+import Contact from "../views/FrontEnd/pages/ContactPage";
+import AboutPage from "../views/FrontEnd/pages/AboutPage";
+import ContentDetails from "../views/FrontEnd/pages/ContentDetails";
 
 export const FrontendRoutes = (
   <>
